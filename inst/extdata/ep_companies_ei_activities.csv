@@ -1,0 +1,124 @@
+companies_id,company_name,country,clustered,activity_uuid_product_uuid,Activity Name,isic_4digit
+ajtm-joints-detancheite_fra599358-00101,ajtm - joints d'étanchéité,france,ptfe sealing gaskets,ff8730f0-d92e-54ed-9a8e-09fc7920cf87_888e7520-545c-4857-a07a-094575afe6ca,"sealing tape production, aluminium/PE, 50 mm wide",2220
+ajtm-joints-detancheite_fra599358-00101,ajtm - joints d'étanchéité,france,bending,77ac10a7-6b05-5e27-8e5c-4358517b1ef6_8aa5cd19-c1ca-49f1-8efb-c7a28f5ad71f,"section bar rolling, steel",2410
+ajtm-joints-detancheite_fra599358-00101,ajtm - joints d'étanchéité,france,cutting,53dae40f-2bf3-5063-9aeb-4e9de4375cc7_c17bc9a6-70c2-49c3-ad5e-16840fa81178,potato haulm cutting,0161
+cades-penedes_00000003942579-001,cades penedes,spain,ethyl alcohol,46ef86a4-d9d5-5185-a2df-94a57b0e7b6f_1a71f77c-edaa-4365-a192-f54ac538d033,ethyl acetate production,2011
+cades-penedes_00000003942579-001,cades penedes,spain,phenols,9f3b74f9-c86d-5866-992f-e7a04ac19653_55b66789-289c-4f21-8d9b-3236e726b933,"phenol production, from cumene",2011
+cades-penedes_00000003942579-001,cades penedes,spain,derivatives,9917da7b-013f-5175-84eb-e337fbd13c3e_9f2fdfd0-e173-47e9-812f-2bee762d9d39,phenoxy-compound production,2021
+cades-penedes_00000003942579-001,cades penedes,spain,tartaric acid,b1cde6f9-fe23-5654-b1f5-6896f8da4906_9d63da75-8289-4b96-a900-67ec3bd40a16,sulfuric acid production,2012
+carlemsaph_00000005472318-001,carlemsaph,france,pharmaceutical raw material,5c5d1cdb-22df-5e58-a3c7-500e031f03e7_dc1ed0ff-fbaa-47a1-8962-4faff492788f,"market for propylene glycol, liquid",2011
+carlemsaph_00000005472318-001,carlemsaph,france,cosmetic,67d97fc9-5854-547e-8c64-84f0deb101ad_779bed36-7f72-4921-b677-e92df06db499,"market for toner, colour, powder",2022
+carlemsaph_00000005472318-001,carlemsaph,france,natural ingredient,82b0b82a-5afb-5078-ac5b-858549881b8b_e303fb73-b0e1-41ae-bddc-5e0e444eb3fb,"market for used vegetable cooking oil, purified",3830
+chemische-fabrik-kalk-gmbh_00000005348927-001,chemische fabrik kalk gmbh,germany,sodium bisulphite solution,70035673-5221-57e2-9396-340db613f186_b21c5bf0-60da-4095-a5b4-cc8b8a3b2668,"resorcinol production, benzene disulfonation",2011
+chemische-fabrik-kalk-gmbh_00000005348927-001,chemische fabrik kalk gmbh,germany,magnesium chloride,fe21abea-06a2-547d-a385-db5afc040b70_a4a72d78-6642-4e02-bec4-8dcd7fc35d4a,epichlorohydrin production from allyl chloride,2011
+chemische-fabrik-kalk-gmbh_00000005348927-001,chemische fabrik kalk gmbh,germany,magnesium chloride hexahydrate,70035673-5221-57e2-9396-340db613f186_b21c5bf0-60da-4095-a5b4-cc8b8a3b2668,"resorcinol production, benzene disulfonation",2011
+chemische-fabrik-kalk-gmbh_00000005348927-001,chemische fabrik kalk gmbh,germany,chemistry derivatives,9570ae5a-2674-54e0-98c1-10cec33ca85a_c6c77fb4-9850-4849-be9e-71fc9656bc03,"heat and power co-generation unit construction, 1MWel, 6.4 MWth",4220
+chemische-fabrik-kalk-gmbh_00000005348927-001,chemische fabrik kalk gmbh,germany,sodium sulphate,70035673-5221-57e2-9396-340db613f186_b21c5bf0-60da-4095-a5b4-cc8b8a3b2668,"resorcinol production, benzene disulfonation",2011
+chemopharma-gmbh_00000004681853-482303001,chemopharma gmbh,austria,pharmaceutical raw material,5c5d1cdb-22df-5e58-a3c7-500e031f03e7_dc1ed0ff-fbaa-47a1-8962-4faff492788f,"market for propylene glycol, liquid",2011
+chemopharma-gmbh_00000004681853-482303001,chemopharma gmbh,austria,beverage additives,cc939e20-27e9-556d-b31f-eb8f0f7d6478_9e6f12d8-b727-4aef-94e3-c8278e3661d7,"market for soda ash, light",2011
+chemopharma-gmbh_00000004681853-482303001,chemopharma gmbh,austria,auxiliary products,e692d2d3-e5bc-53ad-88d5-96302184c130_9c76a11f-ac9b-4931-ad1d-82463634fe89,"market for residues, MSWI-WWT, WW from pig iron production",3821
+curt-georgi-aromas-y-esencias-sa_esp006101-00101,curt georgi aromas y esencias s.a.,spain,essence for perfume,44cf9fd4-da0b-58e5-aec8-52b1c082e97d_43fdfa7d-a9ad-4919-8368-e82a9142101b,market for vanilla,0128
+curt-georgi-aromas-y-esencias-sa_esp006101-00101,curt georgi aromas y esencias s.a.,spain,"essences, nonfood",8ffe142c-26b7-5984-805f-b21e828f3d0d_c6c77fb4-9850-4849-be9e-71fc9656bc03,"market for solvent, organic",20
+curt-georgi-aromas-y-esencias-sa_esp006101-00101,curt georgi aromas y esencias s.a.,spain,scents perfume,44cf9fd4-da0b-58e5-aec8-52b1c082e97d_43fdfa7d-a9ad-4919-8368-e82a9142101b,market for vanilla,0128
+curt-georgi-aromas-y-esencias-sa_esp006101-00101,curt georgi aromas y esencias s.a.,spain,beverage additives,cc939e20-27e9-556d-b31f-eb8f0f7d6478_9e6f12d8-b727-4aef-94e3-c8278e3661d7,"market for soda ash, light",2011
+curt-georgi-aromas-y-esencias-sa_esp006101-00101,curt georgi aromas y esencias s.a.,spain,"fragrances, nonfood",1562b898-da65-5c4c-8dc0-8739fc84e2af_3372cdea-bef5-4186-9ae6-b67a016aa67d,market for soap,2023
+eventhaus-giebel_00000005109486-001,eventhaus giebel,germany,"meats, cooked",4a5f79c5-2bd8-516d-883f-e8765a6529b8_9e36204d-dec9-4fb1-98d6-d84febd5df2c,market for meat and bone meal,1010
+eventhaus-giebel_00000005109486-001,eventhaus giebel,germany,"drinks, soft",cc939e20-27e9-556d-b31f-eb8f0f7d6478_9e6f12d8-b727-4aef-94e3-c8278e3661d7,"market for soda ash, light",2011
+eventhaus-giebel_00000005109486-001,eventhaus giebel,germany,gourmet foods,4a5f79c5-2bd8-516d-883f-e8765a6529b8_9e36204d-dec9-4fb1-98d6-d84febd5df2c,market for meat and bone meal,1010
+eventhaus-giebel_00000005109486-001,eventhaus giebel,germany,"meats, cured",4a5f79c5-2bd8-516d-883f-e8765a6529b8_9e36204d-dec9-4fb1-98d6-d84febd5df2c,market for meat and bone meal,1010
+eventhaus-giebel_00000005109486-001,eventhaus giebel,germany,meat,4a5f79c5-2bd8-516d-883f-e8765a6529b8_9e36204d-dec9-4fb1-98d6-d84febd5df2c,market for meat and bone meal,1010
+eventhaus-giebel_00000005109486-001,eventhaus giebel,germany,"foods, precooked",4a5f79c5-2bd8-516d-883f-e8765a6529b8_9e36204d-dec9-4fb1-98d6-d84febd5df2c,market for meat and bone meal,1010
+eventhaus-giebel_00000005109486-001,eventhaus giebel,germany,"meat, preserved",4a5f79c5-2bd8-516d-883f-e8765a6529b8_9e36204d-dec9-4fb1-98d6-d84febd5df2c,market for meat and bone meal,1010
+funderia-condals-sa_esp003117-00101,funderia condals sa,spain,"iron, special grade",7759be94-3f3c-501c-bdde-1ff23373c885_4f312355-ac65-4635-8fb2-006dba64ce60,sorting and pressing of iron scrap,3830
+funderia-condals-sa_esp003117-00101,funderia condals sa,spain,pig iron,026388d9-4b9a-50b3-bbbe-8b5168139f07_a636ed9e-f90a-48cb-a180-c75b1fc92cf1,pig iron production,2410
+fusterpaprikasl_00000004925158-547281001,"fusterpaprika,s.l.",spain,cloves,732c6740-c4fb-598d-89a0-f8d0a443913f_0d84cdfe-bcf2-4821-8f34-d93b9f611c11,phenolic resin production,2013
+fusterpaprikasl_00000004925158-547281001,"fusterpaprika,s.l.",spain,spices,a0c11946-1f93-573a-b5be-868917c78ec2_d2184fe3-da8e-40d0-a15e-f35bc3624d26,"cottonseed oil, refined, to generic market for vegetable oil, refined",1040
+gemco-engineers-bv_nld014712-00101,gemco engineers b.v.,netherlands,steel,985df177-4c01-544c-8740-4d019ee28fd7_fe95f2c3-b749-489d-ae35-6900865e6a48,"forging, steel, large open die",2410
+gemco-engineers-bv_nld014712-00101,gemco engineers b.v.,netherlands,"casting, steel",25fc72a4-0e32-5ac5-bd9b-e4599e6f80af_425089e2-ad80-414f-b6eb-67b32f5aa626,"casting, steel, lost-wax",2431
+hoganas-ceramiques-france_fra138779-00101,höganäs céramiques france,france,acidproof cladding materials for industrial sites,f64fb1a2-6682-5550-aa71-00ff7b7095e7_76c2aa75-440a-4e94-91fd-96d79c127fab,"cladding production, crossbar-pole, aluminium",2511
+hoganas-ceramiques-france_fra138779-00101,höganäs céramiques france,france,tiling,560c2b82-791a-56d5-a42f-89aafbd6127e_edcaa476-a810-42b5-bbf4-1220d8658c4a,"tillage, harrowing, by offset leveling disc harrow",0161
+hoganas-ceramiques-france_fra138779-00101,höganäs céramiques france,france,coating resins,48b91475-858c-5095-8080-b1daa4edb825_e28d7a4d-fb38-4f5e-aac0-359ecef77b45,orthophthalic acid based unsaturated polyester resin production,2013
+isovolta-ag_aut003916-00101,isovolta ag,austria,thermoset parts,2b72139e-d6d5-5312-bf0f-d2b0b544228f_ffa87882-6302-430b-a4c2-45426a006ed7,isophthalic acid based unsaturated polyester resin production,2013
+isovolta-ag_aut003916-00101,isovolta ag,austria,fibreglass composites,f903beca-a9eb-5ed0-94e0-40e4e46f93dd_102d2161-b570-42cd-b646-1c44e47d23c5,glass fibre production,2310
+isovolta-ag_aut003916-00101,isovolta ag,austria,laminate films,f850bc03-cfbd-5b58-8d11-8c861cde3490_45d92845-1234-4ab6-8401-2e2c0018d13a,"laminating service, foil, with acrylic binder",1812
+isovolta-ag_aut003916-00101,isovolta ag,austria,phenolic-impregnated paper,44ccc901-5301-5805-9012-d7a237980f25_1fb56fd9-e394-4690-b8fe-97147bedbe4e,"coating service, melamine impregnated paper, double-sided",1621
+isovolta-ag_aut003916-00101,isovolta ag,austria,slats,519f6eb9-1f9e-541f-8107-e7dd2c8a847c_40f4e275-e29b-421e-a855-2b22c4082407,"wooden board factory construction, cement bonded boards",4290
+josip-heger-simon-heger-gbr_00000005116109-001,josip heger & simon heger gbr,germany,pig iron,026388d9-4b9a-50b3-bbbe-8b5168139f07_a636ed9e-f90a-48cb-a180-c75b1fc92cf1,pig iron production,2410
+josip-heger-simon-heger-gbr_00000005116109-001,josip heger & simon heger gbr,germany,machining,9efbe45c-76be-5cf5-acab-491aada829dc_442ac1c0-03bd-41f5-b1b5-4e41b419a1cd,"laser machining, metal, with YAG-laser, 330W power",2592
+josip-heger-simon-heger-gbr_00000005116109-001,josip heger & simon heger gbr,germany,plastics - industrial products,72b8c4c2-ba26-5f9a-b69f-30faf0ead015_db3559ad-a065-425f-9d03-551068d5548e,"treatment of waste plastic, industrial electronics, municipal incineration",3821
+josip-heger-simon-heger-gbr_00000005116109-001,josip heger & simon heger gbr,germany,"iron, special grade",7759be94-3f3c-501c-bdde-1ff23373c885_4f312355-ac65-4635-8fb2-006dba64ce60,sorting and pressing of iron scrap,3830
+josip-heger-simon-heger-gbr_00000005116109-001,josip heger & simon heger gbr,germany,"hand tools, non-power",985df177-4c01-544c-8740-4d019ee28fd7_fe95f2c3-b749-489d-ae35-6900865e6a48,"forging, steel, large open die",2410
+josip-heger-simon-heger-gbr_00000005116109-001,josip heger & simon heger gbr,germany,plastic floor covering,153407af-905f-597f-8dde-d2dd73afc055_c449e3b5-385c-454b-acba-e3e6f58c68e4,thermoforming of plastic sheets,2220
+reiflexa-p-reischl-gmbh_deu433363-00101,reiflexa - p. reischl gmbh,germany,tap,3037b07e-d3c2-5eae-80fc-af9c6327a01f_c5adb1fb-872e-4446-a3bb-c4b61aa4bd45,"tap water production, conventional treatment",3600
+reiflexa-p-reischl-gmbh_deu433363-00101,reiflexa - p. reischl gmbh,germany,rubber pipes,61ea02ec-8c51-5cba-bcc3-88d211de3629_0da5307e-df93-4bc2-b5bc-6cda3cb55e8c,synthetic rubber production,2013
+reiflexa-p-reischl-gmbh_deu433363-00101,reiflexa - p. reischl gmbh,germany,rubber tubes,61ea02ec-8c51-5cba-bcc3-88d211de3629_0da5307e-df93-4bc2-b5bc-6cda3cb55e8c,synthetic rubber production,2013
+reiflexa-p-reischl-gmbh_deu433363-00101,reiflexa - p. reischl gmbh,germany,specially designed expansion joints,77ac10a7-6b05-5e27-8e5c-4358517b1ef6_8aa5cd19-c1ca-49f1-8efb-c7a28f5ad71f,"section bar rolling, steel",2410
+reiflexa-p-reischl-gmbh_deu433363-00101,reiflexa - p. reischl gmbh,germany,rubber compensators,2b72139e-d6d5-5312-bf0f-d2b0b544228f_ffa87882-6302-430b-a4c2-45426a006ed7,isophthalic acid based unsaturated polyester resin production,2013
+sales-del-centro_esp191988-001,sales del centro,spain,chlorine for water,16a4cb6f-42dc-5d03-b50d-9b08a7257081_0992e479-07eb-4837-8aa3-d4411f675dad,"market for chlorine, gaseous",2011
+sales-del-centro_esp191988-001,sales del centro,spain,road salt,591926f1-3f58-5a77-b535-b77088cc5839_93015ba0-863d-4535-be49-8a1b16b71782,market for salt,0893
+sales-del-centro_esp191988-001,sales del centro,spain,road maintenance sand,0fea0802-7ee6-5e40-8906-1b3fe572fcf4_c6deb1b3-386b-4c16-8399-29d0283d2673,market for road maintenance,4210
+sales-del-centro_esp191988-001,sales del centro,spain,industrial salt,591926f1-3f58-5a77-b535-b77088cc5839_93015ba0-863d-4535-be49-8a1b16b71782,market for salt,0893
+tierra-productiva_00000005361598-660644001,tierra productiva,netherlands,matchmaking events,991839af-d8ce-56b0-90fc-bef8bc41a716_66084f92-4bed-46cb-931e-7ea8300c0972,"market for mounting, through-hole technology, Pb-free solder",2610
+tierra-productiva_00000005361598-660644001,tierra productiva,netherlands,training for professional,55499d50-1257-54a4-b6ec-c18c94bc34b3_99c359d0-08bc-4bb8-9463-dc087a00dd32,"market for building operation, upmarket hotel",5510
+tierra-productiva_00000005361598-660644001,tierra productiva,netherlands,exhibitions organisation,f6ed6092-4810-56b9-9bf9-da031829b3fc_1b269b5c-9561-4809-b905-ec321866f3ce,"market for operation, computer, desktop, with cathode ray tube display, active mode",8219
+tierra-productiva_00000005361598-660644001,tierra productiva,netherlands,agricultural products,1e382d40-902a-55dc-a8ac-66ed5a467315_52168d4e-8da9-4087-8c12-471f8fe3e2e3,"market for wheat grain, feed, organic",1080
+tierra-productiva_00000005361598-660644001,tierra productiva,netherlands,training for entrepreneurs,b37e7bad-a217-5e24-935a-fb16e48522c2_8b4c7efb-aca1-413c-9efb-2c6a06864a40,"market for operation, computer, laptop, videoconference, electricity from renewable energy products",6110
+tierra-productiva_00000005361598-660644001,tierra productiva,netherlands,b2b meetings,c2a4b2eb-223b-5c8b-be59-01830ae1ad50_21604598-173b-42e2-bf89-6d7f71ddb461,"market for fluorescent whitening agent, DAS1, triazinylaminostilben type",2011
+tierra-productiva_00000005361598-660644001,tierra productiva,netherlands,shows organisation,940c1551-ae40-54fa-bb99-0c388cd59eda_efccec02-11ea-40fb-8ca9-0d4afcff3777,market for television,2640
+vignobles-dideron_fra364354-00101,vignobles dideron,france,wines - france,2ca54fc1-3f6a-57d4-8a44-e4f9d487b1f6_685944f8-452b-4ad4-a01a-863924792f27,market for grape,0121
+vignobles-dideron_fra364354-00101,vignobles dideron,france,liquors,95823ba8-07da-5b27-8c83-4ae29ec2b601_661b630a-c1a4-4c38-837e-393f949105f0,market for green liquor dregs,3822
+vignobles-dideron_fra364354-00101,vignobles dideron,france,"drinks, soft",cc939e20-27e9-556d-b31f-eb8f0f7d6478_9e6f12d8-b727-4aef-94e3-c8278e3661d7,"market for soda ash, light",2011
+vignobles-dideron_fra364354-00101,vignobles dideron,france,spirits,63d8a18b-9b68-5d1d-8ed2-de1979d8dc8a_5f855941-74ab-4d1d-9128-c52f680dc86e,market for white spirit,1920
+walter-glatzer-jun_00000005205392-001,walter glatzer jun.,austria,wine,203c2b80-3133-5b32-b246-b90c8706196b_065d2e72-48d3-4791-9a60-ad15a99b9c57,cork forestry,0230
+walter-glatzer-jun_00000005205392-001,walter glatzer jun.,austria,spirits,6f7863ce-d688-5656-a814-90fce78a3eb7_5f855941-74ab-4d1d-9128-c52f680dc86e,white spirit production,1920
+walter-glatzer-jun_00000005205392-001,walter glatzer jun.,austria,juice,193f4771-9771-5b91-bdeb-4e556da6f3a3_1f7bbd3e-fcd1-412d-8608-035b855ea735,"orange production, fresh grade",0123
+walter-glatzer-jun_00000005205392-001,walter glatzer jun.,austria,"drinks, soft",e3352657-5b29-5986-806f-3a56ae35763d_9e6f12d8-b727-4aef-94e3-c8278e3661d7,"soda production, solvay process",2011
+walter-glatzer-jun_00000005205392-001,walter glatzer jun.,austria,fruit,0846b6f5-07ed-51dc-b655-f3c31e204d72_e4c082c9-dec1-41d1-8fca-0457c8f630e7,jatropha seed production,0111
+zotter-werkzeugnormalien-josef-zotter_00000005231100-001,zotter werkzeug-normalien josef zotter,austria,portable power tools,d7616981-abb5-54dc-a7a9-465f0079a124_fc5ea80c-8e1b-4e88-aece-8b52a1816cff,"market for power adapter, for laptop",2710
+zotter-werkzeugnormalien-josef-zotter_00000005231100-001,zotter werkzeug-normalien josef zotter,austria,machining,33efc45b-e768-52f1-b19e-f6b164dd9f6c_442ac1c0-03bd-41f5-b1b5-4e41b419a1cd,"market for laser machining, metal, with YAG-laser, 330W power",2592
+zotter-werkzeugnormalien-josef-zotter_00000005231100-001,zotter werkzeug-normalien josef zotter,austria,surface coating,a62eb0d6-9120-541c-9772-9b03dd0428b8_88d505a1-3996-4b69-941c-ba500a9f0ee5,market for metal coating facility,4100
+zotter-werkzeugnormalien-josef-zotter_00000005231100-001,zotter werkzeug-normalien josef zotter,austria,"hand tools, non-power",7c082396-1f14-5674-863e-00abc492a6af_fe95f2c3-b749-489d-ae35-6900865e6a48,"market for forging, steel",2410
+zotter-werkzeugnormalien-josef-zotter_00000005231100-001,zotter werkzeug-normalien josef zotter,austria,turning,3756f1a3-a64e-50df-8fbd-8bac56da2fd5_237b35c6-69e1-49c4-8e99-0be6c1b1806e,market for lead,2420
+zotter-werkzeugnormalien-josef-zotter_00000005231100-001,zotter werkzeug-normalien josef zotter,austria,surface treatment,11529ffb-ce88-593f-82ce-3de5aa6da3c4_5bfb6885-a0a0-4f4c-921a-34db393e8dcb,"market for cleaning consumables, without water, in 13.6% solution state",2023
+ajtm-joints-detancheite_fra599358-00101,ajtm - joints d'étanchéité,france,o-rings,NA,NA,NA
+cades-penedes_00000003942579-001,cades penedes,spain,grapeseed oil,NA,NA,NA
+cades-penedes_00000003942579-001,cades penedes,spain,grape oil,NA,NA,NA
+cades-penedes_00000003942579-001,cades penedes,spain,wine alcohol,NA,NA,NA
+cades-penedes_00000003942579-001,cades penedes,spain,alcohol,NA,NA,NA
+carlemsaph_00000005472318-001,carlemsaph,france,cosmetic raw material,NA,NA,NA
+carlemsaph_00000005472318-001,carlemsaph,france,raw materials for natural soaps,NA,NA,NA
+chemische-fabrik-kalk-gmbh_00000005348927-001,chemische fabrik kalk gmbh,germany,calcium carbonate,NA,NA,NA
+chemische-fabrik-kalk-gmbh_00000005348927-001,chemische fabrik kalk gmbh,germany,sulphuric acid,NA,NA,NA
+chemische-fabrik-kalk-gmbh_00000005348927-001,chemische fabrik kalk gmbh,germany,polyaluminium chloride (pac),NA,NA,NA
+chemische-fabrik-kalk-gmbh_00000005348927-001,chemische fabrik kalk gmbh,germany,sodium bicarbonate,NA,NA,NA
+chemische-fabrik-kalk-gmbh_00000005348927-001,chemische fabrik kalk gmbh,germany,chemistry raw materials,NA,NA,NA
+chemische-fabrik-kalk-gmbh_00000005348927-001,chemische fabrik kalk gmbh,germany,oleum,NA,NA,NA
+chemische-fabrik-kalk-gmbh_00000005348927-001,chemische fabrik kalk gmbh,germany,inorganic raw materials,NA,NA,NA
+chemische-fabrik-kalk-gmbh_00000005348927-001,chemische fabrik kalk gmbh,germany,inorganic derivatives,NA,NA,NA
+chemopharma-gmbh_00000004681853-482303001,chemopharma gmbh,austria,crushing of active ingredients for the pharmaceutical industry,NA,NA,NA
+chemopharma-gmbh_00000004681853-482303001,chemopharma gmbh,austria,pharmaceuticals basic products,NA,NA,NA
+chemopharma-gmbh_00000004681853-482303001,chemopharma gmbh,austria,food additives,NA,NA,NA
+chemopharma-gmbh_00000004681853-482303001,chemopharma gmbh,austria,medicinal plant extracts,NA,NA,NA
+curt-georgi-aromas-y-esencias-sa_esp006101-00101,curt georgi aromas y esencias s.a.,spain,food additives,NA,NA,NA
+fusterpaprikasl_00000004925158-547281001,"fusterpaprika,s.l.",spain,pepper,NA,NA,NA
+fusterpaprikasl_00000004925158-547281001,"fusterpaprika,s.l.",spain,paprika,NA,NA,NA
+fusterpaprikasl_00000004925158-547281001,"fusterpaprika,s.l.",spain,ginger,NA,NA,NA
+hoganas-ceramiques-france_fra138779-00101,höganäs céramiques france,france,ceramic interior wall-coverings,NA,NA,NA
+isovolta-ag_aut003916-00101,isovolta ag,austria,fabric for technical use,NA,NA,NA
+isovolta-ag_aut003916-00101,isovolta ag,austria,prepregs,NA,NA,NA
+isovolta-ag_aut003916-00101,isovolta ag,austria,technical tapes,NA,NA,NA
+isovolta-ag_aut003916-00101,isovolta ag,austria,mica products,NA,NA,NA
+isovolta-ag_aut003916-00101,isovolta ag,austria,composite material,NA,NA,NA
+reiflexa-p-reischl-gmbh_deu433363-00101,reiflexa - p. reischl gmbh,germany,high-pressure compensators,NA,NA,NA
+reiflexa-p-reischl-gmbh_deu433363-00101,reiflexa - p. reischl gmbh,germany,inner tubes,NA,NA,NA
+reiflexa-p-reischl-gmbh_deu433363-00101,reiflexa - p. reischl gmbh,germany,tanker hoses,NA,NA,NA
+reiflexa-p-reischl-gmbh_deu433363-00101,reiflexa - p. reischl gmbh,germany,compensators,NA,NA,NA
+reiflexa-p-reischl-gmbh_deu433363-00101,reiflexa - p. reischl gmbh,germany,fittings,NA,NA,NA
+reiflexa-p-reischl-gmbh_deu433363-00101,reiflexa - p. reischl gmbh,germany,discharge hoses,NA,NA,NA
+reiflexa-p-reischl-gmbh_deu433363-00101,reiflexa - p. reischl gmbh,germany,expansion joint,NA,NA,NA
+sales-del-centro_esp191988-001,sales del centro,spain,packaging contractors,NA,NA,NA
+sales-del-centro_esp191988-001,sales del centro,spain,cleaning products,NA,NA,NA
+tierra-productiva_00000005361598-660644001,tierra productiva,netherlands,sale of local products,NA,NA,NA
+tierra-productiva_00000005361598-660644001,tierra productiva,netherlands,trade fair organisation,NA,NA,NA
+walter-glatzer-jun_00000005205392-001,walter glatzer jun.,austria,liquors,NA,NA,NA
+walter-glatzer-jun_00000005205392-001,walter glatzer jun.,austria,vegetable,NA,NA,NA
