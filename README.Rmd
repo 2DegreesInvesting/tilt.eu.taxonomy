@@ -16,7 +16,12 @@ knitr::opts_chunk$set(
 # tilt.eu.taxonomy
 
 <!-- badges: start -->
+[![R-CMD-check](https://github.com/2DegreesInvesting/tilt.eu.taxonomy/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/2DegreesInvesting/tilt.eu.taxonomy/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
+
+The goal of tilt.eu.taxonomy is to assess whether each product of the SME 
+is eligible and aligned according to the activities which follow EU taxonomy 
+regulation objectives.
 
 ## Installation
 
@@ -25,4 +30,152 @@ You can install the development version of tilt.eu.taxonomy from [GitHub](https:
 ``` r
 # install.packages("devtools")
 devtools::install_github("2DegreesInvesting/tilt.eu.taxonomy")
+```
+
+Or
+
+``` r
+# install.packages("pak")
+pak::pak("2DegreesInvesting/tilt.eu.taxonomy")
+```
+
+## Testing EU Taxonomy Eligibility
+
+The products of each Europages company are matched with the Ecoinvent activities. To test whether Europages products are EU Taxonomy eligible, we will match the Ecoinvent activities of these products with the EU Taxonomy activities. The matching process determines whether the product is taxonomy-eligible or not. If the Ecoinvent activity matches a taxonomy activity, then it is classified as eligible. If the product does not match any taxonomy activity, then it is classified as not eligible.
+
+## Setup
+
+```{r}
+library(tilt.eu.taxonomy)
+library(dplyr)
+options(readr.show_col_types = FALSE)
+options(width = 300)
+```
+
+## Load Data
+
+### Load Europages products matched with Ecoinvent activities
+
+This file is extracted from the dataframe `profile_companies` created by the Python class `PCompanies` in the `tiltIndicatorBefore` repository. It contains Europages products matched with Ecoinevnt activities (along with `isic_4digit`).
+
+```{r}
+ep_products_ei_activities <- ep_companies_ei_activities |>
+  select("ep_product", "ecoinvent_activity_name", "isic_4digit")  |>
+  distinct()
+
+ep_products_ei_activities |>
+  slice(1:5)
+```
+
+### EU Taxonomy Activties of EU Taxonomy regulation objectives
+
+EU Taxonomy Regulation sets out six climate and environmental objectives. The six objectives are Climate change mitigation, Climate change adaptation, Protection of water, Transition to a circular economy, Pollution Prevention, and Protection of biodiversity. Each objective outlines those activities which adhere to environmentally sustainable standards. They also outline the information regarding their contribution type, SCC alignment, and DNSH alignment. A subset of activities which follow each objective:
+
+```{r}
+# Climate change mitigation
+eu_tax_climate_mitigation |>
+  slice(11:12)
+```
+
+```{r}
+# Climate change adaptation
+eu_tax_climate_adaptation |>
+  slice(1:2)
+```
+
+```{r}
+# Protection of water
+eu_tax_water_protection |>
+  slice(2:3)
+```
+
+```{r}
+# Transition to a Circular Economy
+eu_tax_circular_economy_transition |>
+  slice(1:2)
+```
+
+```{r}
+# Pollution Prevention
+eu_tax_pollution_prevention |>
+  slice(1:2)
+```
+
+```{r}
+# Protection and restoration of Biodiversity
+eu_tax_biodiversity_protection |>
+  slice(1:5)
+```
+
+### EU Taxonomy Activities' keywords
+
+A small subset of 6 taxonomy activities are selected. Each taxonomy activity is assigned domain-specific keywords which are chosen manually and with the help of OpenAI's ChatGPT model. They are used to improve the quality of the match between Ecoinevnt activities and EU Taxonomy activities by searching each keyword in the matched ecoinvent activity. Only those EU Taxonomy activities are selected as good matches which have at least one keyword present in the matched ecoinvent activity.
+
+```{r}
+eu_tax_activities_keywords
+```
+
+### Load NACE-ISIC sector mapper
+
+NACE-ISIC sector mapper serves as the activity matching bridge between the Ecoinvent activities and EU Taxonomy activities.
+
+```{r}
+isic_nace_mapper |>
+  slice(1:5)
+```
+
+## All EU Taxonomy activities with keywords
+
+This step collects all EU Taxonomy activities into a single table from six objective tables. Then, each activity will be assigned domain-specific keywords using `eu_tax_activities_keywords`. We have assigned keywords to only 6 taxonomy activities, hence we will filter out other taxonomy activities in this example.
+
+```{r}
+eu_tax_activities_all_with_keywords <- eu_tax_activities_all(
+  eu_tax_climate_mitigation, eu_tax_climate_adaptation,
+  eu_tax_water_protection, eu_tax_circular_economy_transition,
+  eu_tax_pollution_prevention, eu_tax_biodiversity_protection
+) |>
+  eu_tax_activities_all_with_keywords(eu_tax_activities_keywords) |>
+  filter(!is.na(tax_activity_keywords))
+
+eu_tax_activities_all_with_keywords |>
+  slice(1:10)
+```
+
+## Matching NACE codes to Ecoinvent activities
+
+To match Ecoinvent activities with EU Taxonomy activities, we will first match the NACE sector codes to Ecoinvent activities using ISIC sector codes present in both datasets `ep_products_ei_activities` and `nace_isic_mapper`.
+
+```{r}
+ecoinvent_activities_with_nace <- ecoinvent_activities_with_nace(ep_products_ei_activities, isic_nace_mapper)
+ecoinvent_activities_with_nace |>
+  slice(1:5)
+```
+
+## Matching Ecoinvent activities (with NACE) to EU Taxonomy activities
+
+NACE codes are used to match Ecoinvent activities and EU Taxonomy activities. There is a one-to-many matching between taxonomy activities and Ecoinvent activities. This means that a single taxonomy activity can be matched to multiple ecoinvent activities.
+
+```{r}
+ecoinvent_activities_eu_tax_activities <- ecoinvent_activities_eu_tax_activities(ecoinvent_activities_with_nace, eu_tax_activities_all_with_keywords)
+ecoinvent_activities_eu_tax_activities
+```
+
+## Ecoinvent activities matched with EU Taxonomy activities after keywords search
+
+As there is one-to-many matching between taxonomy activities and Ecoinvent activities, there is high chance that we might get bad matches between activities. Hence, `taxonomy_keywords` will be used to check whether ecoinvent activities are a closer match to the matched taxonomy activities or not. Each keyword is separated by a semicolon (;) and anything in between consecutive semicolons (including spaces) will be matched with ecoinvent activity. If a single taxonomy keyword is present in the `ecoinvent_activity_name` column then it is stated with "TRUE" in the `keyword_is_present` column. Similarly, "FALSE" is stated if the keyword is not present. 
+
+```{r}
+eco_activities_after_keywords_search <- eco_activities_after_keywords_search(ecoinvent_activities_eu_tax_activities)
+eco_activities_after_keywords_search |>
+  slice(1:10)
+```
+
+## EU Taxonomy-eligible ecoinvent activities
+
+The ecoinvent activities which have "TRUE" in the `keyword_is_present` column are considered EU Taxonomy-eligible because they are matched with EU Taxonomy activities after ISIC-NACE mapping and keywords search. Here is a list of a small subset of EU Taxonomy-eligible ecoinvent activities:
+
+```{r}
+eco_activities_after_keywords_search |>
+  filter(keyword_is_present == TRUE) |>
+  slice(44:48)
 ```

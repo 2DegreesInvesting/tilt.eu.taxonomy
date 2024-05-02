@@ -26,8 +26,13 @@
 #' ))
 #' output
 eco_activities_after_keywords_search <- function(data) {
-  data |>
-    rowwise() |>
-    mutate(keyword_is_present = any(str_detect(.data$ecoinvent_activity_name, str_split(.data$tax_activity_keywords, ";", simplify = TRUE)))) |>
-    ungroup()
+  data$keyword_is_present <- mapply(check_matches, data$ecoinvent_activity_name, data$tax_activity_keywords)
+  return(data)
+}
+
+check_matches <- function(sentence, words_to_search) {
+  words <- unlist(str_split(words_to_search, "; "))
+  pattern <- paste0("\\b", paste(words, collapse = "\\b|\\b"), "\\b")
+  matches <- any(str_detect(sentence, pattern))
+  return(matches)
 }
