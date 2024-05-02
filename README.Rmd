@@ -41,7 +41,7 @@ pak::pak("2DegreesInvesting/tilt.eu.taxonomy")
 
 ## Testing EU Taxonomy Eligibility
 
-The products of each Europages company are mapped with the Ecoinvent activities. To test whether Europages products are EU Taxonomy eligible, we will match the Ecoinvent activities of these products with the EU Taxonomy activities. The matching process determines whether the product is taxonomy-eligible or not. If the Ecoinvent activity matches a taxonomy activity, then it is classified as eligible. If the product does not match any taxonomy activity, then it is classified as not eligible.
+The products of each Europages company are matched with the Ecoinvent activities. To test whether Europages products are EU Taxonomy eligible, we will match the Ecoinvent activities of these products with the EU Taxonomy activities. The matching process determines whether the product is taxonomy-eligible or not. If the Ecoinvent activity matches a taxonomy activity, then it is classified as eligible. If the product does not match any taxonomy activity, then it is classified as not eligible.
 
 ## Setup
 
@@ -54,9 +54,9 @@ options(width = 300)
 
 ## Load Data
 
-### Load Europages products mapped with Ecoinvent activities
+### Load Europages products matched with Ecoinvent activities
 
-This file is extracted from the dataframe `profile_companies` created by the Python class `PCompanies` in the `tiltIndicatorBefore` repository. It contains Europages products mapped with Ecoinevnt activities (along with `isic_4digit`).
+This file is extracted from the dataframe `profile_companies` created by the Python class `PCompanies` in the `tiltIndicatorBefore` repository. It contains Europages products matched with Ecoinevnt activities (along with `isic_4digit`).
 
 ```{r}
 ep_products_ei_activities <- ep_companies_ei_activities |>
@@ -109,7 +109,7 @@ eu_tax_biodiversity_protection |>
 
 ### EU Taxonomy Activities' keywords
 
-These keywords are manually chosen and resemble the main domain of EU Taxonomy activities. They are used to improve the quality of the match between Ecoinevnt activities and EU Taxonomy activities by searching each keyword in the mapped ecoinvent activity. Only those EU Taxonomy activities are selected as good matches which have at least one keyword present in the mapped ecoinvent activity.
+A small subset of 6 taxonomy activities are selected. Each taxonomy activity is assigned domain-specific keywords which are chosen manually and with the help of OpenAI's ChatGPT model. They are used to improve the quality of the match between Ecoinevnt activities and EU Taxonomy activities by searching each keyword in the matched ecoinvent activity. Only those EU Taxonomy activities are selected as good matches which have at least one keyword present in the matched ecoinvent activity.
 
 ```{r}
 eu_tax_activities_keywords
@@ -117,7 +117,7 @@ eu_tax_activities_keywords
 
 ### Load NACE-ISIC sector mapper
 
-NACE-ISIC sector mapper serves as the activity mapping bridge between the Ecoinvent activities and EU Taxonomy activities.
+NACE-ISIC sector mapper serves as the activity matching bridge between the Ecoinvent activities and EU Taxonomy activities.
 
 ```{r}
 isic_nace_mapper |>
@@ -126,7 +126,7 @@ isic_nace_mapper |>
 
 ## All EU Taxonomy activities with keywords
 
-This step collects all EU Taxonomy activities into a single table from six objective tables. Then, each activity will be assigned domain-specific keywords using `eu_tax_activities_keywords`. We have selected a small subset of taxonomy activities with keywords.
+This step collects all EU Taxonomy activities into a single table from six objective tables. Then, each activity will be assigned domain-specific keywords using `eu_tax_activities_keywords`. We have assigned keywords to only 6 taxonomy activities, hence we will filter out other taxonomy activities in this example.
 
 ```{r}
 eu_tax_activities_all_with_keywords <- eu_tax_activities_all(
@@ -141,9 +141,9 @@ eu_tax_activities_all_with_keywords |>
   slice(1:10)
 ```
 
-## Mapping NACE codes to Ecoinvent activities
+## Matching NACE codes to Ecoinvent activities
 
-To map Ecoinvent activities with EU Taxonomy activities, we will first map the NACE sector codes to Ecoinvent activities using ISIC sector codes present in both datasets `ep_products_ei_activities` and `nace_isic_mapper`.
+To match Ecoinvent activities with EU Taxonomy activities, we will first match the NACE sector codes to Ecoinvent activities using ISIC sector codes present in both datasets `ep_products_ei_activities` and `nace_isic_mapper`.
 
 ```{r}
 ecoinvent_activities_with_nace <- ecoinvent_activities_with_nace(ep_products_ei_activities, isic_nace_mapper)
@@ -151,18 +151,18 @@ ecoinvent_activities_with_nace |>
   slice(1:5)
 ```
 
-## Mapping Ecoinvent activities (with NACE) to EU Taxonomy activities
+## Matching Ecoinvent activities (with NACE) to EU Taxonomy activities
 
-NACE codes are used to map Ecoinvent activities and EU Taxonomy activities. There is a one-to-many mapping between taxonomy activities and Ecoinvent activities. This means that a single taxonomy activity can be mapped to multiple ecoinvent activities.
+NACE codes are used to match Ecoinvent activities and EU Taxonomy activities. There is a one-to-many matching between taxonomy activities and Ecoinvent activities. This means that a single taxonomy activity can be matched to multiple ecoinvent activities.
 
 ```{r}
 ecoinvent_activities_eu_tax_activities <- ecoinvent_activities_eu_tax_activities(ecoinvent_activities_with_nace, eu_tax_activities_all_with_keywords)
 ecoinvent_activities_eu_tax_activities
 ```
 
-## Ecoinvent activities mapped with EU Taxonomy activities after keywords search
+## Ecoinvent activities matched with EU Taxonomy activities after keywords search
 
-As there is one-to-many mapping between taxonomy activities and Ecoinvent activities, there are high chance that we might get bad matches between activities. Hence, `taxonomy_keywords` will be used to check whether ecoinvent activities are a closer match to the mapped taxonomy activity or not. If a single taxonomy keyword is present in the `ecoinvent_activity_name` column then it is stated with "TRUE" in the `keyword_is_present` column. Similarly, "FALSE" is stated if the keyword is not present. 
+As there is one-to-many matching between taxonomy activities and Ecoinvent activities, there is high chance that we might get bad matches between activities. Hence, `taxonomy_keywords` will be used to check whether ecoinvent activities are a closer match to the matched taxonomy activities or not. Each keyword is separated by a semicolon (;) and anything in between consecutive semicolons (including spaces) will be matched with ecoinvent activity. If a single taxonomy keyword is present in the `ecoinvent_activity_name` column then it is stated with "TRUE" in the `keyword_is_present` column. Similarly, "FALSE" is stated if the keyword is not present. 
 
 ```{r}
 eco_activities_after_keywords_search <- eco_activities_after_keywords_search(ecoinvent_activities_eu_tax_activities)
