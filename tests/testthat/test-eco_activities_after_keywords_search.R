@@ -1,5 +1,5 @@
 test_that("each keyword is searched as a separate keyword", {
-  ep_companies_ei_activities_sample <- tibble::tibble(
+  ep_companies_ei_activities_sample <- tibble(
     companies_id = "any",
     company_name = "any",
     country = "any",
