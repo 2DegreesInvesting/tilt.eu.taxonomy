@@ -28,10 +28,6 @@
 eco_activities_after_keywords_search <- function(data) {
   data$keyword_is_present <- mapply(check_matches, data$ecoinvent_activity_name, data$tax_activity_keywords)
   return(data)
-  # data |>
-  #   rowwise() |>
-  #   mutate(keyword_is_present = any(str_detect(.data$ecoinvent_activity_name, str_split(.data$tax_activity_keywords, ";", simplify = TRUE)))) |>
-  #   ungroup()
 }
 
 check_matches <- function(sentence, words_to_search) {
