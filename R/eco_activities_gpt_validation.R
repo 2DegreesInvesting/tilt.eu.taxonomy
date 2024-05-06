@@ -29,7 +29,16 @@
 #' output <- eco_activities_gpt_validation(eco_activities_after_keywords_search)
 #' output
 eco_activities_gpt_validation <- function(data) {
-  api_key <- readLines('/Users/kalashsinghal/git/key/access_key.txt')
+  # api_key <- readLines('/Users/kalashsinghal/git/2DII/tilt.eu.taxonomy/access_key.txt')
+  # api_key <- readLines('./inst/extdata/access_key.txt')
+
+  package_dir <- system.file(package = "tilt.eu.taxonomy")
+
+  # Specify the path to the .txt file within the package directory
+  file_path <- file.path(package_dir, "extdata", "access_key.txt")
+
+  # Read the content of the .txt file
+  api_key <- readLines(file_path)
 
   gpt_validation <- data |>
     mutate(gpt_validation = unlist(Map(gpt_validate, data$ecoinvent_activity_name, data$tax_activity_description)))

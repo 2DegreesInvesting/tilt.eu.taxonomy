@@ -51,3 +51,7 @@ rsconnect/
 .Rdata
 .DS_Store
 .quarto
+
+# OpenAI access key
+access_key.txt
+
