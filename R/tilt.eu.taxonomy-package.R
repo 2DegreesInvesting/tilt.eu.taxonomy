@@ -14,6 +14,7 @@
 #' @importFrom dplyr rowwise
 #' @importFrom dplyr select
 #' @importFrom dplyr ungroup
+#' @importFrom openai create_chat_completion
 #' @importFrom readxl read_xlsx
 #' @importFrom rlang .data
 #' @importFrom stringr str_detect
