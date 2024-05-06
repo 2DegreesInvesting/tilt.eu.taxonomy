@@ -23,8 +23,7 @@ gpt_validate <- function(ecoinvent, taxonomy) {
     prompt_with_data <- sprintf(prompt, ecoinvent, taxonomy)
     output <- create_chat_completion(
       model = "gpt-4-turbo",
-      messages = list(list("role" = "user", "content" = prompt_with_data)),
-      openai_api_key = openai.api_key
+      messages = list(list("role" = "user", "content" = prompt_with_data))
     )$choices$message.content
   }
 
