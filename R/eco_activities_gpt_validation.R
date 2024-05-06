@@ -30,14 +30,14 @@
 #' output
 eco_activities_gpt_validation <- function(data) {
   # file_path <- file.path(getwd(), "inst", "extdata", "access_key.txt")
-  api_key <- readLines(system.file("access_key.txt", package = "tilt.eu.taxonomy"))
+  # api_key <- readLines(system.file("access_key.txt", package = "tilt.eu.taxonomy"))
   # api_key <- readLines('./access_key.txt')
 
   gpt_validation <- data |>
     mutate(gpt_validation = unlist(Map(gpt_validate, data$ecoinvent_activity_name, data$tax_activity_description)))
 
-  api_key = "---"
-  rm(api_key)
+  # api_key = "---"
+  # rm(api_key)
 
   return(gpt_validation)
 }
@@ -54,6 +54,8 @@ gpt_validate <- function(ecoinvent, taxonomy) {
   'taxonomy_activity_description' column = {%s}
   "
 
+  api_key <- readLines(system.file("access_key.txt", package = "tilt.eu.taxonomy"))
+
   if (is.na(ecoinvent) | is.na(taxonomy)) {
     output <- "No"
   } else {
@@ -63,6 +65,9 @@ gpt_validate <- function(ecoinvent, taxonomy) {
       messages = list(list("role" = "user", "content" = prompt_with_data))
     )$choices$message.content
   }
+
+  api_key = "---"
+  rm(api_key)
 
   return(output)
 }
