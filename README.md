@@ -61,26 +61,24 @@ options(width = 300)
 
 ### Load Europages products matched with Ecoinvent activities
 
-This file is extracted from the dataframe `profile_companies` created by
-the Python class `PCompanies` in the `tiltIndicatorBefore` repository.
-It contains Europages products matched with Ecoinevnt activities (along
-with `isic_4digit`).
+`ep_companies_ei_activities` is extracted from the dataframe
+`profile_companies` created by the Python class `PCompanies` in the
+`tiltIndicatorBefore` repository. It contains Europages companies and
+products matched with Ecoinvent activities (along with `isic_4digit`).
+We will select the product-level columns from the whole dataset.
 
 ``` r
-ep_products_ei_activities <- ep_companies_ei_activities |>
-  select("ep_product", "ecoinvent_activity_name", "isic_4digit")  |>
-  distinct()
-
-ep_products_ei_activities |>
+ep_products_ei_activities_product <- ep_companies_ei_activities_at_product_level(ep_companies_ei_activities)
+ep_products_ei_activities_product |>
   slice(1:5)
-#> # A tibble: 5 × 3
-#>   ep_product           ecoinvent_activity_name                           isic_4digit
-#>   <chr>                <chr>                                             <chr>      
-#> 1 ptfe sealing gaskets sealing tape production, aluminium/PE, 50 mm wide 2220       
-#> 2 bending              section bar rolling, steel                        2410       
-#> 3 cutting              potato haulm cutting                              0161       
-#> 4 ethyl alcohol        ethyl acetate production                          2011       
-#> 5 phenols              phenol production, from cumene                    2011
+#> # A tibble: 5 × 4
+#>   ep_product           activity_uuid_product_uuid                                                ecoinvent_activity_name                           isic_4digit
+#>   <chr>                <chr>                                                                     <chr>                                             <chr>      
+#> 1 ptfe sealing gaskets ff8730f0-d92e-54ed-9a8e-09fc7920cf87_888e7520-545c-4857-a07a-094575afe6ca sealing tape production, aluminium/PE, 50 mm wide 2220       
+#> 2 bending              77ac10a7-6b05-5e27-8e5c-4358517b1ef6_8aa5cd19-c1ca-49f1-8efb-c7a28f5ad71f section bar rolling, steel                        2410       
+#> 3 cutting              53dae40f-2bf3-5063-9aeb-4e9de4375cc7_c17bc9a6-70c2-49c3-ad5e-16840fa81178 potato haulm cutting                              0161       
+#> 4 ethyl alcohol        46ef86a4-d9d5-5185-a2df-94a57b0e7b6f_1a71f77c-edaa-4365-a192-f54ac538d033 ethyl acetate production                          2011       
+#> 5 phenols              9f3b74f9-c86d-5866-992f-e7a04ac19653_55b66789-289c-4f21-8d9b-3236e726b933 phenol production, from cumene                    2011
 ```
 
 ### EU Taxonomy Activties of EU Taxonomy regulation objectives
@@ -248,17 +246,17 @@ codes present in both datasets `ep_products_ei_activities` and
 `nace_isic_mapper`.
 
 ``` r
-ecoinvent_activities_with_nace <- ecoinvent_activities_with_nace(ep_products_ei_activities, isic_nace_mapper)
+ecoinvent_activities_with_nace <- ecoinvent_activities_with_nace(ep_products_ei_activities_product, isic_nace_mapper)
 ecoinvent_activities_with_nace |>
   slice(1:5)
-#> # A tibble: 5 × 4
-#>   ep_product           ecoinvent_activity_name                           isic_4digit NACE  
-#>   <chr>                <chr>                                             <chr>       <chr> 
-#> 1 ptfe sealing gaskets sealing tape production, aluminium/PE, 50 mm wide 2220        C22.21
-#> 2 ptfe sealing gaskets sealing tape production, aluminium/PE, 50 mm wide 2220        C22.22
-#> 3 ptfe sealing gaskets sealing tape production, aluminium/PE, 50 mm wide 2220        C22.23
-#> 4 ptfe sealing gaskets sealing tape production, aluminium/PE, 50 mm wide 2220        C22.29
-#> 5 bending              section bar rolling, steel                        2410        C24.10
+#> # A tibble: 5 × 5
+#>   ep_product           activity_uuid_product_uuid                                                ecoinvent_activity_name                           isic_4digit NACE  
+#>   <chr>                <chr>                                                                     <chr>                                             <chr>       <chr> 
+#> 1 ptfe sealing gaskets ff8730f0-d92e-54ed-9a8e-09fc7920cf87_888e7520-545c-4857-a07a-094575afe6ca sealing tape production, aluminium/PE, 50 mm wide 2220        C22.21
+#> 2 ptfe sealing gaskets ff8730f0-d92e-54ed-9a8e-09fc7920cf87_888e7520-545c-4857-a07a-094575afe6ca sealing tape production, aluminium/PE, 50 mm wide 2220        C22.22
+#> 3 ptfe sealing gaskets ff8730f0-d92e-54ed-9a8e-09fc7920cf87_888e7520-545c-4857-a07a-094575afe6ca sealing tape production, aluminium/PE, 50 mm wide 2220        C22.23
+#> 4 ptfe sealing gaskets ff8730f0-d92e-54ed-9a8e-09fc7920cf87_888e7520-545c-4857-a07a-094575afe6ca sealing tape production, aluminium/PE, 50 mm wide 2220        C22.29
+#> 5 bending              77ac10a7-6b05-5e27-8e5c-4358517b1ef6_8aa5cd19-c1ca-49f1-8efb-c7a28f5ad71f section bar rolling, steel                        2410        C24.10
 ```
 
 ## Matching Ecoinvent activities (with NACE) to EU Taxonomy activities
@@ -271,23 +269,23 @@ be matched to multiple ecoinvent activities.
 ``` r
 ecoinvent_activities_eu_tax_activities <- ecoinvent_activities_eu_tax_activities(ecoinvent_activities_with_nace, eu_tax_activities_all_with_keywords)
 ecoinvent_activities_eu_tax_activities
-#> # A tibble: 253 × 7
-#>    ep_product           ecoinvent_activity_name                           isic_4digit NACE   tax_activity                  tax_activity_description                                                                                                                                    tax_activity_keywords
-#>    <chr>                <chr>                                             <chr>       <chr>  <chr>                         <chr>                                                                                                                                                       <chr>                
-#>  1 ptfe sealing gaskets sealing tape production, aluminium/PE, 50 mm wide 2220        C22.21 <NA>                          <NA>                                                                                                                                                        <NA>                 
-#>  2 ptfe sealing gaskets sealing tape production, aluminium/PE, 50 mm wide 2220        C22.22 <NA>                          <NA>                                                                                                                                                        <NA>                 
-#>  3 ptfe sealing gaskets sealing tape production, aluminium/PE, 50 mm wide 2220        C22.23 <NA>                          <NA>                                                                                                                                                        <NA>                 
-#>  4 ptfe sealing gaskets sealing tape production, aluminium/PE, 50 mm wide 2220        C22.29 <NA>                          <NA>                                                                                                                                                        <NA>                 
-#>  5 bending              section bar rolling, steel                        2410        C24.10 Manufacture of iron and steel Manufacture of iron and steel. The economic activities in this category could be associated with several NACE codes, in particular C24.10, C24.20, C24.31,… iron; steel; ferrous…
-#>  6 bending              section bar rolling, steel                        2410        C24.20 Manufacture of iron and steel Manufacture of iron and steel. The economic activities in this category could be associated with several NACE codes, in particular C24.10, C24.20, C24.31,… iron; steel; ferrous…
-#>  7 bending              section bar rolling, steel                        2410        C24.31 Manufacture of iron and steel Manufacture of iron and steel. The economic activities in this category could be associated with several NACE codes, in particular C24.10, C24.20, C24.31,… iron; steel; ferrous…
-#>  8 bending              section bar rolling, steel                        2410        C24.32 Manufacture of iron and steel Manufacture of iron and steel. The economic activities in this category could be associated with several NACE codes, in particular C24.10, C24.20, C24.31,… iron; steel; ferrous…
-#>  9 bending              section bar rolling, steel                        2410        C24.33 Manufacture of iron and steel Manufacture of iron and steel. The economic activities in this category could be associated with several NACE codes, in particular C24.10, C24.20, C24.31,… iron; steel; ferrous…
-#> 10 bending              section bar rolling, steel                        2410        C24.34 Manufacture of iron and steel Manufacture of iron and steel. The economic activities in this category could be associated with several NACE codes, in particular C24.10, C24.20, C24.31,… iron; steel; ferrous…
+#> # A tibble: 253 × 8
+#>    ep_product           activity_uuid_product_uuid                                                ecoinvent_activity_name                           isic_4digit NACE   tax_activity                  tax_activity_description                                                          tax_activity_keywords
+#>    <chr>                <chr>                                                                     <chr>                                             <chr>       <chr>  <chr>                         <chr>                                                                             <chr>                
+#>  1 ptfe sealing gaskets ff8730f0-d92e-54ed-9a8e-09fc7920cf87_888e7520-545c-4857-a07a-094575afe6ca sealing tape production, aluminium/PE, 50 mm wide 2220        C22.21 <NA>                          <NA>                                                                              <NA>                 
+#>  2 ptfe sealing gaskets ff8730f0-d92e-54ed-9a8e-09fc7920cf87_888e7520-545c-4857-a07a-094575afe6ca sealing tape production, aluminium/PE, 50 mm wide 2220        C22.22 <NA>                          <NA>                                                                              <NA>                 
+#>  3 ptfe sealing gaskets ff8730f0-d92e-54ed-9a8e-09fc7920cf87_888e7520-545c-4857-a07a-094575afe6ca sealing tape production, aluminium/PE, 50 mm wide 2220        C22.23 <NA>                          <NA>                                                                              <NA>                 
+#>  4 ptfe sealing gaskets ff8730f0-d92e-54ed-9a8e-09fc7920cf87_888e7520-545c-4857-a07a-094575afe6ca sealing tape production, aluminium/PE, 50 mm wide 2220        C22.29 <NA>                          <NA>                                                                              <NA>                 
+#>  5 bending              77ac10a7-6b05-5e27-8e5c-4358517b1ef6_8aa5cd19-c1ca-49f1-8efb-c7a28f5ad71f section bar rolling, steel                        2410        C24.10 Manufacture of iron and steel Manufacture of iron and steel. The economic activities in this category could be… iron; steel; ferrous…
+#>  6 bending              77ac10a7-6b05-5e27-8e5c-4358517b1ef6_8aa5cd19-c1ca-49f1-8efb-c7a28f5ad71f section bar rolling, steel                        2410        C24.20 Manufacture of iron and steel Manufacture of iron and steel. The economic activities in this category could be… iron; steel; ferrous…
+#>  7 bending              77ac10a7-6b05-5e27-8e5c-4358517b1ef6_8aa5cd19-c1ca-49f1-8efb-c7a28f5ad71f section bar rolling, steel                        2410        C24.31 Manufacture of iron and steel Manufacture of iron and steel. The economic activities in this category could be… iron; steel; ferrous…
+#>  8 bending              77ac10a7-6b05-5e27-8e5c-4358517b1ef6_8aa5cd19-c1ca-49f1-8efb-c7a28f5ad71f section bar rolling, steel                        2410        C24.32 Manufacture of iron and steel Manufacture of iron and steel. The economic activities in this category could be… iron; steel; ferrous…
+#>  9 bending              77ac10a7-6b05-5e27-8e5c-4358517b1ef6_8aa5cd19-c1ca-49f1-8efb-c7a28f5ad71f section bar rolling, steel                        2410        C24.33 Manufacture of iron and steel Manufacture of iron and steel. The economic activities in this category could be… iron; steel; ferrous…
+#> 10 bending              77ac10a7-6b05-5e27-8e5c-4358517b1ef6_8aa5cd19-c1ca-49f1-8efb-c7a28f5ad71f section bar rolling, steel                        2410        C24.34 Manufacture of iron and steel Manufacture of iron and steel. The economic activities in this category could be… iron; steel; ferrous…
 #> # ℹ 243 more rows
 ```
 
-## Ecoinvent activities matched with EU Taxonomy activities after keywords search
+## Keywords search to validate match between Ecoinvent activities and EU Taxonomy activities
 
 As there is one-to-many matching between taxonomy activities and
 Ecoinvent activities, there is high chance that we might get bad matches
@@ -304,39 +302,156 @@ keyword is not present.
 eco_activities_after_keywords_search <- eco_activities_after_keywords_search(ecoinvent_activities_eu_tax_activities)
 eco_activities_after_keywords_search |>
   slice(1:10)
-#> # A tibble: 10 × 8
-#>    ep_product           ecoinvent_activity_name                           isic_4digit NACE   tax_activity                  tax_activity_description                                                                                                                 tax_activity_keywords keyword_is_present
-#>    <chr>                <chr>                                             <chr>       <chr>  <chr>                         <chr>                                                                                                                                    <chr>                 <lgl>             
-#>  1 ptfe sealing gaskets sealing tape production, aluminium/PE, 50 mm wide 2220        C22.21 <NA>                          <NA>                                                                                                                                     <NA>                  NA                
-#>  2 ptfe sealing gaskets sealing tape production, aluminium/PE, 50 mm wide 2220        C22.22 <NA>                          <NA>                                                                                                                                     <NA>                  NA                
-#>  3 ptfe sealing gaskets sealing tape production, aluminium/PE, 50 mm wide 2220        C22.23 <NA>                          <NA>                                                                                                                                     <NA>                  NA                
-#>  4 ptfe sealing gaskets sealing tape production, aluminium/PE, 50 mm wide 2220        C22.29 <NA>                          <NA>                                                                                                                                     <NA>                  NA                
-#>  5 bending              section bar rolling, steel                        2410        C24.10 Manufacture of iron and steel Manufacture of iron and steel. The economic activities in this category could be associated with several NACE codes, in particular C24.… iron; steel; ferrous… TRUE              
-#>  6 bending              section bar rolling, steel                        2410        C24.20 Manufacture of iron and steel Manufacture of iron and steel. The economic activities in this category could be associated with several NACE codes, in particular C24.… iron; steel; ferrous… TRUE              
-#>  7 bending              section bar rolling, steel                        2410        C24.31 Manufacture of iron and steel Manufacture of iron and steel. The economic activities in this category could be associated with several NACE codes, in particular C24.… iron; steel; ferrous… TRUE              
-#>  8 bending              section bar rolling, steel                        2410        C24.32 Manufacture of iron and steel Manufacture of iron and steel. The economic activities in this category could be associated with several NACE codes, in particular C24.… iron; steel; ferrous… TRUE              
-#>  9 bending              section bar rolling, steel                        2410        C24.33 Manufacture of iron and steel Manufacture of iron and steel. The economic activities in this category could be associated with several NACE codes, in particular C24.… iron; steel; ferrous… TRUE              
-#> 10 bending              section bar rolling, steel                        2410        C24.34 Manufacture of iron and steel Manufacture of iron and steel. The economic activities in this category could be associated with several NACE codes, in particular C24.… iron; steel; ferrous… TRUE
+#> # A tibble: 10 × 9
+#>    ep_product           activity_uuid_product_uuid                                                ecoinvent_activity_name                           isic_4digit NACE   tax_activity                  tax_activity_description                                       tax_activity_keywords keyword_is_present
+#>    <chr>                <chr>                                                                     <chr>                                             <chr>       <chr>  <chr>                         <chr>                                                          <chr>                 <lgl>             
+#>  1 ptfe sealing gaskets ff8730f0-d92e-54ed-9a8e-09fc7920cf87_888e7520-545c-4857-a07a-094575afe6ca sealing tape production, aluminium/PE, 50 mm wide 2220        C22.21 <NA>                          <NA>                                                           <NA>                  FALSE             
+#>  2 ptfe sealing gaskets ff8730f0-d92e-54ed-9a8e-09fc7920cf87_888e7520-545c-4857-a07a-094575afe6ca sealing tape production, aluminium/PE, 50 mm wide 2220        C22.22 <NA>                          <NA>                                                           <NA>                  FALSE             
+#>  3 ptfe sealing gaskets ff8730f0-d92e-54ed-9a8e-09fc7920cf87_888e7520-545c-4857-a07a-094575afe6ca sealing tape production, aluminium/PE, 50 mm wide 2220        C22.23 <NA>                          <NA>                                                           <NA>                  FALSE             
+#>  4 ptfe sealing gaskets ff8730f0-d92e-54ed-9a8e-09fc7920cf87_888e7520-545c-4857-a07a-094575afe6ca sealing tape production, aluminium/PE, 50 mm wide 2220        C22.29 <NA>                          <NA>                                                           <NA>                  FALSE             
+#>  5 bending              77ac10a7-6b05-5e27-8e5c-4358517b1ef6_8aa5cd19-c1ca-49f1-8efb-c7a28f5ad71f section bar rolling, steel                        2410        C24.10 Manufacture of iron and steel Manufacture of iron and steel. The economic activities in thi… iron; steel; ferrous… TRUE              
+#>  6 bending              77ac10a7-6b05-5e27-8e5c-4358517b1ef6_8aa5cd19-c1ca-49f1-8efb-c7a28f5ad71f section bar rolling, steel                        2410        C24.20 Manufacture of iron and steel Manufacture of iron and steel. The economic activities in thi… iron; steel; ferrous… TRUE              
+#>  7 bending              77ac10a7-6b05-5e27-8e5c-4358517b1ef6_8aa5cd19-c1ca-49f1-8efb-c7a28f5ad71f section bar rolling, steel                        2410        C24.31 Manufacture of iron and steel Manufacture of iron and steel. The economic activities in thi… iron; steel; ferrous… TRUE              
+#>  8 bending              77ac10a7-6b05-5e27-8e5c-4358517b1ef6_8aa5cd19-c1ca-49f1-8efb-c7a28f5ad71f section bar rolling, steel                        2410        C24.32 Manufacture of iron and steel Manufacture of iron and steel. The economic activities in thi… iron; steel; ferrous… TRUE              
+#>  9 bending              77ac10a7-6b05-5e27-8e5c-4358517b1ef6_8aa5cd19-c1ca-49f1-8efb-c7a28f5ad71f section bar rolling, steel                        2410        C24.33 Manufacture of iron and steel Manufacture of iron and steel. The economic activities in thi… iron; steel; ferrous… TRUE              
+#> 10 bending              77ac10a7-6b05-5e27-8e5c-4358517b1ef6_8aa5cd19-c1ca-49f1-8efb-c7a28f5ad71f section bar rolling, steel                        2410        C24.34 Manufacture of iron and steel Manufacture of iron and steel. The economic activities in thi… iron; steel; ferrous… TRUE
 ```
 
-## EU Taxonomy-eligible ecoinvent activities
+## ChatGPT match validation between Ecoinvent activities and EU Taxonomy activities’ description
 
-The ecoinvent activities which have “TRUE” in the `keyword_is_present`
-column are considered EU Taxonomy-eligible because they are matched with
-EU Taxonomy activities after ISIC-NACE mapping and keywords search. Here
-is a list of a small subset of EU Taxonomy-eligible ecoinvent
-activities:
+The EU taxonomy provides a description column for each taxonomy activity
+which contains more information about them. Hence, we propose to use
+this additional information to validate whether the ecoinvent activities
+will be covered by the taxonomy activity description or not. ChatGPT is
+used to validate the same using `Yes` (covered well) and `No` (not
+covered well) for each matched `ecoinvent_activity_name` and
+`tax_activity_description`.
 
 ``` r
-eco_activities_after_keywords_search |>
-  filter(keyword_is_present == TRUE) |>
-  slice(44:48)
-#> # A tibble: 5 × 8
-#>   ep_product                          ecoinvent_activity_name                                       isic_4digit NACE   tax_activity                            tax_activity_description                                                                             tax_activity_keywords keyword_is_present
-#>   <chr>                               <chr>                                                         <chr>       <chr>  <chr>                                   <chr>                                                                                                <chr>                 <lgl>             
-#> 1 specially designed expansion joints section bar rolling, steel                                    2410        C24.33 Manufacture of iron and steel           Manufacture of iron and steel. The economic activities in this category could be associated with se… iron; steel; ferrous… TRUE              
-#> 2 specially designed expansion joints section bar rolling, steel                                    2410        C24.34 Manufacture of iron and steel           Manufacture of iron and steel. The economic activities in this category could be associated with se… iron; steel; ferrous… TRUE              
-#> 3 rubber compensators                 isophthalic acid based unsaturated polyester resin production 2013        C20.16 Manufacture of plastics in primary form Manufacture resins, plastics materials and non-vulcanisable thermoplastic elastomers, the mixing an… resin; plastic; ther… TRUE              
-#> 4 chlorine for water                  market for chlorine, gaseous                                  2011        C20.13 Manufacture of chlorine                 Manufacture of chlorine.The economic activities in this category could be associated with NACE code… chlorine; sodium chl… TRUE              
-#> 5 hand tools, non-power               market for forging, steel                                     2410        C24.10 Manufacture of iron and steel           Manufacture of iron and steel. The economic activities in this category could be associated with se… iron; steel; ferrous… TRUE
+eco_activities_after_gpt_validation <- eco_activities_gpt_validation(eco_activities_after_keywords_search)
+eco_activities_after_gpt_validation |>
+  slice(1:10)
+#> # A tibble: 10 × 10
+#>    ep_product           activity_uuid_product_uuid                                                ecoinvent_activity_name                           isic_4digit NACE   tax_activity                  tax_activity_description                        tax_activity_keywords keyword_is_present gpt_validation
+#>    <chr>                <chr>                                                                     <chr>                                             <chr>       <chr>  <chr>                         <chr>                                           <chr>                 <lgl>              <chr>         
+#>  1 ptfe sealing gaskets ff8730f0-d92e-54ed-9a8e-09fc7920cf87_888e7520-545c-4857-a07a-094575afe6ca sealing tape production, aluminium/PE, 50 mm wide 2220        C22.21 <NA>                          <NA>                                            <NA>                  FALSE              No            
+#>  2 ptfe sealing gaskets ff8730f0-d92e-54ed-9a8e-09fc7920cf87_888e7520-545c-4857-a07a-094575afe6ca sealing tape production, aluminium/PE, 50 mm wide 2220        C22.22 <NA>                          <NA>                                            <NA>                  FALSE              No            
+#>  3 ptfe sealing gaskets ff8730f0-d92e-54ed-9a8e-09fc7920cf87_888e7520-545c-4857-a07a-094575afe6ca sealing tape production, aluminium/PE, 50 mm wide 2220        C22.23 <NA>                          <NA>                                            <NA>                  FALSE              No            
+#>  4 ptfe sealing gaskets ff8730f0-d92e-54ed-9a8e-09fc7920cf87_888e7520-545c-4857-a07a-094575afe6ca sealing tape production, aluminium/PE, 50 mm wide 2220        C22.29 <NA>                          <NA>                                            <NA>                  FALSE              No            
+#>  5 bending              77ac10a7-6b05-5e27-8e5c-4358517b1ef6_8aa5cd19-c1ca-49f1-8efb-c7a28f5ad71f section bar rolling, steel                        2410        C24.10 Manufacture of iron and steel Manufacture of iron and steel. The economic ac… iron; steel; ferrous… TRUE               Yes           
+#>  6 bending              77ac10a7-6b05-5e27-8e5c-4358517b1ef6_8aa5cd19-c1ca-49f1-8efb-c7a28f5ad71f section bar rolling, steel                        2410        C24.20 Manufacture of iron and steel Manufacture of iron and steel. The economic ac… iron; steel; ferrous… TRUE               Yes           
+#>  7 bending              77ac10a7-6b05-5e27-8e5c-4358517b1ef6_8aa5cd19-c1ca-49f1-8efb-c7a28f5ad71f section bar rolling, steel                        2410        C24.31 Manufacture of iron and steel Manufacture of iron and steel. The economic ac… iron; steel; ferrous… TRUE               Yes           
+#>  8 bending              77ac10a7-6b05-5e27-8e5c-4358517b1ef6_8aa5cd19-c1ca-49f1-8efb-c7a28f5ad71f section bar rolling, steel                        2410        C24.32 Manufacture of iron and steel Manufacture of iron and steel. The economic ac… iron; steel; ferrous… TRUE               Yes           
+#>  9 bending              77ac10a7-6b05-5e27-8e5c-4358517b1ef6_8aa5cd19-c1ca-49f1-8efb-c7a28f5ad71f section bar rolling, steel                        2410        C24.33 Manufacture of iron and steel Manufacture of iron and steel. The economic ac… iron; steel; ferrous… TRUE               Yes           
+#> 10 bending              77ac10a7-6b05-5e27-8e5c-4358517b1ef6_8aa5cd19-c1ca-49f1-8efb-c7a28f5ad71f section bar rolling, steel                        2410        C24.34 Manufacture of iron and steel Manufacture of iron and steel. The economic ac… iron; steel; ferrous… TRUE               Yes
 ```
+
+## EU Taxonomy-eligible Europages products
+
+The Europages products which have “TRUE” in `keyword_is_present` column
+and “Yes” in `gpt_validation` column are considered EU Taxonomy-eligible
+because they are matched with EU Taxonomy activities (via ecoinvent
+activities) after ISIC-NACE mapping, keywords search, and ChatGPT
+validation. Here is a list of a small subset of EU Taxonomy-eligible
+Europages products:
+
+``` r
+tax_eligible_ep_products <- taxonomy_eligible(eco_activities_after_gpt_validation)
+tax_eligible_ep_products |>
+  slice(30:34)
+#> # A tibble: 5 × 10
+#>   ep_product            activity_uuid_product_uuid                                                ecoinvent_activity_name                                         isic_4digit NACE   tax_activity                            tax_activity_descript…¹ tax_activity_keywords keyword_is_present gpt_validation
+#>   <chr>                 <chr>                                                                     <chr>                                                           <chr>       <chr>  <chr>                                   <chr>                   <chr>                 <lgl>              <chr>         
+#> 1 casting, steel        25fc72a4-0e32-5ac5-bd9b-e4599e6f80af_425089e2-ad80-414f-b6eb-67b32f5aa626 casting, steel, lost-wax                                        2431        C24.52 Manufacture of iron and steel           Manufacture of iron an… iron; steel; ferrous… TRUE               Yes           
+#> 2 coating resins        48b91475-858c-5095-8080-b1daa4edb825_e28d7a4d-fb38-4f5e-aac0-359ecef77b45 orthophthalic acid based unsaturated polyester resin production 2013        C20.16 Manufacture of plastics in primary form Manufacture resins, pl… resin; plastic; ther… TRUE               Yes           
+#> 3 thermoset parts       2b72139e-d6d5-5312-bf0f-d2b0b544228f_ffa87882-6302-430b-a4c2-45426a006ed7 isophthalic acid based unsaturated polyester resin production   2013        C20.16 Manufacture of plastics in primary form Manufacture resins, pl… resin; plastic; ther… TRUE               Yes           
+#> 4 hand tools, non-power 985df177-4c01-544c-8740-4d019ee28fd7_fe95f2c3-b749-489d-ae35-6900865e6a48 forging, steel, large open die                                  2410        C24.10 Manufacture of iron and steel           Manufacture of iron an… iron; steel; ferrous… TRUE               Yes           
+#> 5 hand tools, non-power 985df177-4c01-544c-8740-4d019ee28fd7_fe95f2c3-b749-489d-ae35-6900865e6a48 forging, steel, large open die                                  2410        C24.20 Manufacture of iron and steel           Manufacture of iron an… iron; steel; ferrous… TRUE               Yes           
+#> # ℹ abbreviated name: ¹​tax_activity_description
+```
+
+## EU Taxonomy Indicator at company level
+
+After identifying Europages products which are EU Taxonomy-eligible, we
+want to find out which Europages companies have taxonomy-eligible
+Europages products. This section loads company level columns and then
+joins them with matched ecoinvent activities after gpt validation.
+Lastly, final step filters the Europages companies which have
+taxonomy-eligible Europages products.
+
+### Load company-level columns from `ep_companies_ei_activities` dataset
+
+``` r
+ep_products_ei_activities_company <- ep_companies_ei_activities_at_company_level(ep_companies_ei_activities)
+ep_products_ei_activities_company |>
+  slice(1:10)
+#> # A tibble: 10 × 5
+#>    companies_id                            company_name               country ep_product                  activity_uuid_product_uuid                                               
+#>    <chr>                                   <chr>                      <chr>   <chr>                       <chr>                                                                    
+#>  1 ajtm-joints-detancheite_fra599358-00101 ajtm - joints d'étanchéité france  ptfe sealing gaskets        ff8730f0-d92e-54ed-9a8e-09fc7920cf87_888e7520-545c-4857-a07a-094575afe6ca
+#>  2 ajtm-joints-detancheite_fra599358-00101 ajtm - joints d'étanchéité france  bending                     77ac10a7-6b05-5e27-8e5c-4358517b1ef6_8aa5cd19-c1ca-49f1-8efb-c7a28f5ad71f
+#>  3 ajtm-joints-detancheite_fra599358-00101 ajtm - joints d'étanchéité france  cutting                     53dae40f-2bf3-5063-9aeb-4e9de4375cc7_c17bc9a6-70c2-49c3-ad5e-16840fa81178
+#>  4 cades-penedes_00000003942579-001        cades penedes              spain   ethyl alcohol               46ef86a4-d9d5-5185-a2df-94a57b0e7b6f_1a71f77c-edaa-4365-a192-f54ac538d033
+#>  5 cades-penedes_00000003942579-001        cades penedes              spain   phenols                     9f3b74f9-c86d-5866-992f-e7a04ac19653_55b66789-289c-4f21-8d9b-3236e726b933
+#>  6 cades-penedes_00000003942579-001        cades penedes              spain   derivatives                 9917da7b-013f-5175-84eb-e337fbd13c3e_9f2fdfd0-e173-47e9-812f-2bee762d9d39
+#>  7 cades-penedes_00000003942579-001        cades penedes              spain   tartaric acid               b1cde6f9-fe23-5654-b1f5-6896f8da4906_9d63da75-8289-4b96-a900-67ec3bd40a16
+#>  8 carlemsaph_00000005472318-001           carlemsaph                 france  pharmaceutical raw material 5c5d1cdb-22df-5e58-a3c7-500e031f03e7_dc1ed0ff-fbaa-47a1-8962-4faff492788f
+#>  9 carlemsaph_00000005472318-001           carlemsaph                 france  cosmetic                    67d97fc9-5854-547e-8c64-84f0deb101ad_779bed36-7f72-4921-b677-e92df06db499
+#> 10 carlemsaph_00000005472318-001           carlemsaph                 france  natural ingredient          82b0b82a-5afb-5078-ac5b-858549881b8b_e303fb73-b0e1-41ae-bddc-5e0e444eb3fb
+```
+
+### Join matched ecoinvent activties after gpt validation to Europages companies
+
+``` r
+companies_matched_eco_activities <- ep_companies_join_matched_eco_activities(ep_products_ei_activities_company, eco_activities_after_gpt_validation)
+companies_matched_eco_activities |>
+  slice(1:10)
+#> # A tibble: 10 × 13
+#>    companies_id                            company_name               country ep_product           activity_uuid_product_uuid                                           ecoinvent_activity_n…¹ isic_4digit NACE  tax_activity tax_activity_descrip…² tax_activity_keywords keyword_is_present gpt_validation
+#>    <chr>                                   <chr>                      <chr>   <chr>                <chr>                                                                <chr>                  <chr>       <chr> <chr>        <chr>                  <chr>                 <lgl>              <chr>         
+#>  1 ajtm-joints-detancheite_fra599358-00101 ajtm - joints d'étanchéité france  ptfe sealing gaskets ff8730f0-d92e-54ed-9a8e-09fc7920cf87_888e7520-545c-4857-a07a-094575… sealing tape producti… 2220        C22.… <NA>         <NA>                   <NA>                  FALSE              No            
+#>  2 ajtm-joints-detancheite_fra599358-00101 ajtm - joints d'étanchéité france  ptfe sealing gaskets ff8730f0-d92e-54ed-9a8e-09fc7920cf87_888e7520-545c-4857-a07a-094575… sealing tape producti… 2220        C22.… <NA>         <NA>                   <NA>                  FALSE              No            
+#>  3 ajtm-joints-detancheite_fra599358-00101 ajtm - joints d'étanchéité france  ptfe sealing gaskets ff8730f0-d92e-54ed-9a8e-09fc7920cf87_888e7520-545c-4857-a07a-094575… sealing tape producti… 2220        C22.… <NA>         <NA>                   <NA>                  FALSE              No            
+#>  4 ajtm-joints-detancheite_fra599358-00101 ajtm - joints d'étanchéité france  ptfe sealing gaskets ff8730f0-d92e-54ed-9a8e-09fc7920cf87_888e7520-545c-4857-a07a-094575… sealing tape producti… 2220        C22.… <NA>         <NA>                   <NA>                  FALSE              No            
+#>  5 ajtm-joints-detancheite_fra599358-00101 ajtm - joints d'étanchéité france  bending              77ac10a7-6b05-5e27-8e5c-4358517b1ef6_8aa5cd19-c1ca-49f1-8efb-c7a28f… section bar rolling, … 2410        C24.… Manufacture… Manufacture of iron a… iron; steel; ferrous… TRUE               Yes           
+#>  6 ajtm-joints-detancheite_fra599358-00101 ajtm - joints d'étanchéité france  bending              77ac10a7-6b05-5e27-8e5c-4358517b1ef6_8aa5cd19-c1ca-49f1-8efb-c7a28f… section bar rolling, … 2410        C24.… Manufacture… Manufacture of iron a… iron; steel; ferrous… TRUE               Yes           
+#>  7 ajtm-joints-detancheite_fra599358-00101 ajtm - joints d'étanchéité france  bending              77ac10a7-6b05-5e27-8e5c-4358517b1ef6_8aa5cd19-c1ca-49f1-8efb-c7a28f… section bar rolling, … 2410        C24.… Manufacture… Manufacture of iron a… iron; steel; ferrous… TRUE               Yes           
+#>  8 ajtm-joints-detancheite_fra599358-00101 ajtm - joints d'étanchéité france  bending              77ac10a7-6b05-5e27-8e5c-4358517b1ef6_8aa5cd19-c1ca-49f1-8efb-c7a28f… section bar rolling, … 2410        C24.… Manufacture… Manufacture of iron a… iron; steel; ferrous… TRUE               Yes           
+#>  9 ajtm-joints-detancheite_fra599358-00101 ajtm - joints d'étanchéité france  bending              77ac10a7-6b05-5e27-8e5c-4358517b1ef6_8aa5cd19-c1ca-49f1-8efb-c7a28f… section bar rolling, … 2410        C24.… Manufacture… Manufacture of iron a… iron; steel; ferrous… TRUE               Yes           
+#> 10 ajtm-joints-detancheite_fra599358-00101 ajtm - joints d'étanchéité france  bending              77ac10a7-6b05-5e27-8e5c-4358517b1ef6_8aa5cd19-c1ca-49f1-8efb-c7a28f… section bar rolling, … 2410        C24.… Manufacture… Manufacture of iron a… iron; steel; ferrous… TRUE               Yes           
+#> # ℹ abbreviated names: ¹​ecoinvent_activity_name, ²​tax_activity_description
+```
+
+### EU Taxonomy-eligible Europages companies
+
+``` r
+tax_eligible_ep_companies <- taxonomy_eligible(companies_matched_eco_activities)
+tax_eligible_ep_companies |>
+  slice(1:10)
+#> # A tibble: 10 × 13
+#>    companies_id                            company_name               country ep_product                  activity_uuid_product_uuid                                    ecoinvent_activity_n…¹ isic_4digit NACE  tax_activity tax_activity_descrip…² tax_activity_keywords keyword_is_present gpt_validation
+#>    <chr>                                   <chr>                      <chr>   <chr>                       <chr>                                                         <chr>                  <chr>       <chr> <chr>        <chr>                  <chr>                 <lgl>              <chr>         
+#>  1 ajtm-joints-detancheite_fra599358-00101 ajtm - joints d'étanchéité france  bending                     77ac10a7-6b05-5e27-8e5c-4358517b1ef6_8aa5cd19-c1ca-49f1-8efb… section bar rolling, … 2410        C24.… Manufacture… Manufacture of iron a… iron; steel; ferrous… TRUE               Yes           
+#>  2 ajtm-joints-detancheite_fra599358-00101 ajtm - joints d'étanchéité france  bending                     77ac10a7-6b05-5e27-8e5c-4358517b1ef6_8aa5cd19-c1ca-49f1-8efb… section bar rolling, … 2410        C24.… Manufacture… Manufacture of iron a… iron; steel; ferrous… TRUE               Yes           
+#>  3 ajtm-joints-detancheite_fra599358-00101 ajtm - joints d'étanchéité france  bending                     77ac10a7-6b05-5e27-8e5c-4358517b1ef6_8aa5cd19-c1ca-49f1-8efb… section bar rolling, … 2410        C24.… Manufacture… Manufacture of iron a… iron; steel; ferrous… TRUE               Yes           
+#>  4 ajtm-joints-detancheite_fra599358-00101 ajtm - joints d'étanchéité france  bending                     77ac10a7-6b05-5e27-8e5c-4358517b1ef6_8aa5cd19-c1ca-49f1-8efb… section bar rolling, … 2410        C24.… Manufacture… Manufacture of iron a… iron; steel; ferrous… TRUE               Yes           
+#>  5 ajtm-joints-detancheite_fra599358-00101 ajtm - joints d'étanchéité france  bending                     77ac10a7-6b05-5e27-8e5c-4358517b1ef6_8aa5cd19-c1ca-49f1-8efb… section bar rolling, … 2410        C24.… Manufacture… Manufacture of iron a… iron; steel; ferrous… TRUE               Yes           
+#>  6 ajtm-joints-detancheite_fra599358-00101 ajtm - joints d'étanchéité france  bending                     77ac10a7-6b05-5e27-8e5c-4358517b1ef6_8aa5cd19-c1ca-49f1-8efb… section bar rolling, … 2410        C24.… Manufacture… Manufacture of iron a… iron; steel; ferrous… TRUE               Yes           
+#>  7 cades-penedes_00000003942579-001        cades penedes              spain   phenols                     9f3b74f9-c86d-5866-992f-e7a04ac19653_55b66789-289c-4f21-8d9b… phenol production, fr… 2011        C20.… Manufacture… Manufacture of: high … acetylene; ethylene;… TRUE               Yes           
+#>  8 cades-penedes_00000003942579-001        cades penedes              spain   phenols                     9f3b74f9-c86d-5866-992f-e7a04ac19653_55b66789-289c-4f21-8d9b… phenol production, fr… 2011        C20.… Manufacture… Manufacture of:high v… acetylene; ethylene;… TRUE               Yes           
+#>  9 carlemsaph_00000005472318-001           carlemsaph                 france  pharmaceutical raw material 5c5d1cdb-22df-5e58-a3c7-500e031f03e7_dc1ed0ff-fbaa-47a1-8962… market for propylene … 2011        C20.… Manufacture… Manufacture of: high … acetylene; ethylene;… TRUE               Yes           
+#> 10 carlemsaph_00000005472318-001           carlemsaph                 france  pharmaceutical raw material 5c5d1cdb-22df-5e58-a3c7-500e031f03e7_dc1ed0ff-fbaa-47a1-8962… market for propylene … 2011        C20.… Manufacture… Manufacture of:high v… acetylene; ethylene;… TRUE               Yes           
+#> # ℹ abbreviated names: ¹​ecoinvent_activity_name, ²​tax_activity_description
+```
+
+## Next steps
+
+1.  Apply prototype to CPC classification products + Europages products.
+2.  Clarify whether market activities can be eligible for EU Taxonomy
+    activities starting with “Manufacture of…”?
+3.  TBC how to validate “maybe” from GPT validation.
+4.  Expand to all EU Taxonomy activities.
+5.  Company-level results output share of products that are aligned, not
+    aligned, NA,  
+    transitional and enabling (“contribution type”).
+6.  Optional: Include alignment assessment.
