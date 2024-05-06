@@ -29,8 +29,15 @@
 #' output <- eco_activities_gpt_validation(eco_activities_after_keywords_search)
 #' output
 eco_activities_gpt_validation <- function(data) {
-  data |>
+  api_key <- readLines('/Users/kalashsinghal/git/key/access_key.txt')
+
+  gpt_validation <- data |>
     mutate(gpt_validation = unlist(Map(gpt_validate, data$ecoinvent_activity_name, data$tax_activity_description)))
+
+  api_key = "---"
+  rm(api_key)
+
+  return(gpt_validation)
 }
 
 gpt_validate <- function(ecoinvent, taxonomy) {
