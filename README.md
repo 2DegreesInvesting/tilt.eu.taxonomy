@@ -9,8 +9,7 @@
 <!-- badges: end -->
 
 The goal of tilt.eu.taxonomy is to assess whether each product of the
-SME is eligible and aligned according to the activities which follow EU
-taxonomy regulation objectives.
+SME is eligible for the EU taxonomy regulation.
 
 ## Installation
 
@@ -166,13 +165,14 @@ eu_tax_biodiversity_protection |>
 
 ### EU Taxonomy Activities’ keywords
 
-A small subset of 6 taxonomy activities are selected. Each taxonomy
-activity is assigned domain-specific keywords which are chosen manually
-and with the help of OpenAI’s ChatGPT model. They are used to improve
-the quality of the match between Ecoinevnt activities and EU Taxonomy
-activities by searching each keyword in the matched ecoinvent activity.
-Only those EU Taxonomy activities are selected as good matches which
-have at least one keyword present in the matched ecoinvent activity.
+This prototype focuses on a small subset of 7 taxonomy activities which
+are shown below. Each taxonomy activity is assigned domain-specific
+keywords which are chosen manually and with the help of OpenAI’s ChatGPT
+model. They are used to improve the quality of the match between
+Ecoinevnt activities and EU Taxonomy activities by searching each
+keyword in the matched ecoinvent activity. Only those EU Taxonomy
+activities are selected as good matches which have at least one keyword
+present in the matched ecoinvent activity.
 
 ``` r
 eu_tax_activities_keywords
@@ -209,7 +209,7 @@ isic_nace_mapper |>
 This step collects all EU Taxonomy activities into a single table from
 six objective tables. Then, each activity will be assigned
 domain-specific keywords using `eu_tax_activities_keywords`. We have
-assigned keywords to only 6 taxonomy activities, hence we will filter
+assigned keywords to only 7 taxonomy activities, hence we will filter
 out other taxonomy activities in this example.
 
 ``` r
@@ -240,10 +240,11 @@ eu_tax_activities_all_with_keywords |>
 
 ## Matching NACE codes to Ecoinvent activities
 
-To match Ecoinvent activities with EU Taxonomy activities, we will first
-match the NACE sector codes to Ecoinvent activities using ISIC sector
-codes present in both datasets `ep_products_ei_activities` and
-`nace_isic_mapper`.
+NACE sector codes are used to match Ecoinvent activities with EU
+Taxonomy activities. Ecoinvent activities table
+`ep_products_ei_activities` don’t have NACE codes. As a first step, to
+match NACE codes to `ep_products_ei_activities`, we will use the ISIC
+sector codes as the mapper present in the `nace_isic_mapper` file.
 
 ``` r
 ecoinvent_activities_with_nace <- ecoinvent_activities_with_nace(ep_products_ei_activities_product, isic_nace_mapper)
@@ -262,9 +263,12 @@ ecoinvent_activities_with_nace |>
 ## Matching Ecoinvent activities (with NACE) to EU Taxonomy activities
 
 NACE codes are used to match Ecoinvent activities and EU Taxonomy
-activities. There is a one-to-many matching between taxonomy activities
-and Ecoinvent activities. This means that a single taxonomy activity can
-be matched to multiple ecoinvent activities.
+activities. Both the tables `eu_tax_activities_all_with_keywords` and
+`ecoinvent_activities_with_nace` have the NACE codes. After matching
+Ecoinvent activities and EU Taxonomy activities, there is a one-to-many
+relationship between taxonomy activities and Ecoinvent activities
+respectively. This means that a single taxonomy activity is related to
+multiple ecoinvent activities.
 
 ``` r
 ecoinvent_activities_eu_tax_activities <- ecoinvent_activities_eu_tax_activities(ecoinvent_activities_with_nace, eu_tax_activities_all_with_keywords)
@@ -287,16 +291,16 @@ ecoinvent_activities_eu_tax_activities
 
 ## Keywords search to validate match between Ecoinvent activities and EU Taxonomy activities
 
-As there is one-to-many matching between taxonomy activities and
-Ecoinvent activities, there is high chance that we might get bad matches
-between activities. Hence, `taxonomy_keywords` will be used to check
-whether ecoinvent activities are a closer match to the matched taxonomy
-activities or not. Each keyword is separated by a semicolon (;) and
-anything in between consecutive semicolons (including spaces) will be
-matched with ecoinvent activity. If a single taxonomy keyword is present
-in the `ecoinvent_activity_name` column then it is stated with “TRUE” in
-the `keyword_is_present` column. Similarly, “FALSE” is stated if the
-keyword is not present.
+As there is a one-to-many relationship between taxonomy activities and
+Ecoinvent activities, there is a high chance that we might get bad
+matches between activities. Hence, `taxonomy_keywords` will be used to
+check whether ecoinvent activities are a closer match to the matched
+taxonomy activities or not. Each keyword is separated by a semicolon
+(;), and any value between consecutive semicolons will be matched with
+ecoinvent activity. If a single taxonomy keyword is present in the
+`ecoinvent_activity_name` column, the presence is stated with “TRUE” in
+the `keyword_is_present` column. And “FALSE” is stated if the keyword is
+not present.
 
 ``` r
 eco_activities_after_keywords_search <- eco_activities_after_keywords_search(ecoinvent_activities_eu_tax_activities)
@@ -325,7 +329,16 @@ this additional information to validate whether the ecoinvent activities
 will be covered by the taxonomy activity description or not. ChatGPT is
 used to validate the same using `Yes` (covered well) and `No` (not
 covered well) for each matched `ecoinvent_activity_name` and
-`tax_activity_description`.
+`tax_activity_description`. We used OpenAI’s `gpt-4-turbo` model for
+validation with the following prompt:
+
+    "We have a dataframe with columns 'ecoinvent_activity_name' and
+    'taxonomy_activity_description'. Check row wise whether the ecoinvent activity
+    (column 'ecoinvent_activity_name') covered by the EU Taxonomy activity description
+    (column 'taxonomy_activity_description'). Please provide only one word answer
+    with `Yes` or `No` without any explaination, where `Yes` means covered well and
+    `No` means not covered well.
+    "
 
 ``` r
 eco_activities_after_gpt_validation <- eco_activities_gpt_validation(eco_activities_after_keywords_search)
@@ -362,11 +375,11 @@ tax_eligible_ep_products |>
 #> # A tibble: 5 × 10
 #>   ep_product            activity_uuid_product_uuid                                                ecoinvent_activity_name                                         isic_4digit NACE   tax_activity                            tax_activity_descript…¹ tax_activity_keywords keyword_is_present gpt_validation
 #>   <chr>                 <chr>                                                                     <chr>                                                           <chr>       <chr>  <chr>                                   <chr>                   <chr>                 <lgl>              <chr>         
-#> 1 casting, steel        25fc72a4-0e32-5ac5-bd9b-e4599e6f80af_425089e2-ad80-414f-b6eb-67b32f5aa626 casting, steel, lost-wax                                        2431        C24.52 Manufacture of iron and steel           Manufacture of iron an… iron; steel; ferrous… TRUE               Yes           
-#> 2 coating resins        48b91475-858c-5095-8080-b1daa4edb825_e28d7a4d-fb38-4f5e-aac0-359ecef77b45 orthophthalic acid based unsaturated polyester resin production 2013        C20.16 Manufacture of plastics in primary form Manufacture resins, pl… resin; plastic; ther… TRUE               Yes           
-#> 3 thermoset parts       2b72139e-d6d5-5312-bf0f-d2b0b544228f_ffa87882-6302-430b-a4c2-45426a006ed7 isophthalic acid based unsaturated polyester resin production   2013        C20.16 Manufacture of plastics in primary form Manufacture resins, pl… resin; plastic; ther… TRUE               Yes           
-#> 4 hand tools, non-power 985df177-4c01-544c-8740-4d019ee28fd7_fe95f2c3-b749-489d-ae35-6900865e6a48 forging, steel, large open die                                  2410        C24.10 Manufacture of iron and steel           Manufacture of iron an… iron; steel; ferrous… TRUE               Yes           
-#> 5 hand tools, non-power 985df177-4c01-544c-8740-4d019ee28fd7_fe95f2c3-b749-489d-ae35-6900865e6a48 forging, steel, large open die                                  2410        C24.20 Manufacture of iron and steel           Manufacture of iron an… iron; steel; ferrous… TRUE               Yes           
+#> 1 coating resins        48b91475-858c-5095-8080-b1daa4edb825_e28d7a4d-fb38-4f5e-aac0-359ecef77b45 orthophthalic acid based unsaturated polyester resin production 2013        C20.16 Manufacture of plastics in primary form Manufacture resins, pl… resin; plastic; ther… TRUE               Yes           
+#> 2 thermoset parts       2b72139e-d6d5-5312-bf0f-d2b0b544228f_ffa87882-6302-430b-a4c2-45426a006ed7 isophthalic acid based unsaturated polyester resin production   2013        C20.16 Manufacture of plastics in primary form Manufacture resins, pl… resin; plastic; ther… TRUE               Yes           
+#> 3 hand tools, non-power 985df177-4c01-544c-8740-4d019ee28fd7_fe95f2c3-b749-489d-ae35-6900865e6a48 forging, steel, large open die                                  2410        C24.10 Manufacture of iron and steel           Manufacture of iron an… iron; steel; ferrous… TRUE               Yes           
+#> 4 hand tools, non-power 985df177-4c01-544c-8740-4d019ee28fd7_fe95f2c3-b749-489d-ae35-6900865e6a48 forging, steel, large open die                                  2410        C24.20 Manufacture of iron and steel           Manufacture of iron an… iron; steel; ferrous… TRUE               Yes           
+#> 5 hand tools, non-power 985df177-4c01-544c-8740-4d019ee28fd7_fe95f2c3-b749-489d-ae35-6900865e6a48 forging, steel, large open die                                  2410        C24.31 Manufacture of iron and steel           Manufacture of iron an… iron; steel; ferrous… TRUE               Yes           
 #> # ℹ abbreviated name: ¹​tax_activity_description
 ```
 
