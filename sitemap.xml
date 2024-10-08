@@ -1,84 +1,30 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://2degreesinvesting.github.io/tilt.eu.taxonomy/404.html</loc>
-  </url>
-  <url>
-    <loc>https://2degreesinvesting.github.io/tilt.eu.taxonomy/LICENSE-text.html</loc>
-  </url>
-  <url>
-    <loc>https://2degreesinvesting.github.io/tilt.eu.taxonomy/LICENSE.html</loc>
-  </url>
-  <url>
-    <loc>https://2degreesinvesting.github.io/tilt.eu.taxonomy/authors.html</loc>
-  </url>
-  <url>
-    <loc>https://2degreesinvesting.github.io/tilt.eu.taxonomy/index.html</loc>
-  </url>
-  <url>
-    <loc>https://2degreesinvesting.github.io/tilt.eu.taxonomy/news/index.html</loc>
-  </url>
-  <url>
-    <loc>https://2degreesinvesting.github.io/tilt.eu.taxonomy/reference/eco_activities_after_keywords_search.html</loc>
-  </url>
-  <url>
-    <loc>https://2degreesinvesting.github.io/tilt.eu.taxonomy/reference/eco_activities_gpt_validation.html</loc>
-  </url>
-  <url>
-    <loc>https://2degreesinvesting.github.io/tilt.eu.taxonomy/reference/ecoinvent_activities_eu_tax_activities.html</loc>
-  </url>
-  <url>
-    <loc>https://2degreesinvesting.github.io/tilt.eu.taxonomy/reference/ecoinvent_activities_with_nace.html</loc>
-  </url>
-  <url>
-    <loc>https://2degreesinvesting.github.io/tilt.eu.taxonomy/reference/ep_companies_ei_activities.html</loc>
-  </url>
-  <url>
-    <loc>https://2degreesinvesting.github.io/tilt.eu.taxonomy/reference/ep_companies_ei_activities_at_company_level.html</loc>
-  </url>
-  <url>
-    <loc>https://2degreesinvesting.github.io/tilt.eu.taxonomy/reference/ep_companies_ei_activities_at_product_level.html</loc>
-  </url>
-  <url>
-    <loc>https://2degreesinvesting.github.io/tilt.eu.taxonomy/reference/ep_companies_join_matched_eco_activities.html</loc>
-  </url>
-  <url>
-    <loc>https://2degreesinvesting.github.io/tilt.eu.taxonomy/reference/eu_tax_activities_all.html</loc>
-  </url>
-  <url>
-    <loc>https://2degreesinvesting.github.io/tilt.eu.taxonomy/reference/eu_tax_activities_all_with_keywords.html</loc>
-  </url>
-  <url>
-    <loc>https://2degreesinvesting.github.io/tilt.eu.taxonomy/reference/eu_tax_activities_keywords.html</loc>
-  </url>
-  <url>
-    <loc>https://2degreesinvesting.github.io/tilt.eu.taxonomy/reference/eu_tax_biodiversity_protection.html</loc>
-  </url>
-  <url>
-    <loc>https://2degreesinvesting.github.io/tilt.eu.taxonomy/reference/eu_tax_circular_economy_transition.html</loc>
-  </url>
-  <url>
-    <loc>https://2degreesinvesting.github.io/tilt.eu.taxonomy/reference/eu_tax_climate_adaptation.html</loc>
-  </url>
-  <url>
-    <loc>https://2degreesinvesting.github.io/tilt.eu.taxonomy/reference/eu_tax_climate_mitigation.html</loc>
-  </url>
-  <url>
-    <loc>https://2degreesinvesting.github.io/tilt.eu.taxonomy/reference/eu_tax_pollution_prevention.html</loc>
-  </url>
-  <url>
-    <loc>https://2degreesinvesting.github.io/tilt.eu.taxonomy/reference/eu_tax_water_protection.html</loc>
-  </url>
-  <url>
-    <loc>https://2degreesinvesting.github.io/tilt.eu.taxonomy/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>https://2degreesinvesting.github.io/tilt.eu.taxonomy/reference/isic_nace_mapper.html</loc>
-  </url>
-  <url>
-    <loc>https://2degreesinvesting.github.io/tilt.eu.taxonomy/reference/taxonomy_eligible.html</loc>
-  </url>
-  <url>
-    <loc>https://2degreesinvesting.github.io/tilt.eu.taxonomy/reference/tilt.eu.taxonomy-package.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://2degreesinvesting.github.io/tilt.eu.taxonomy/404.html</loc></url>
+<url><loc>https://2degreesinvesting.github.io/tilt.eu.taxonomy/LICENSE-text.html</loc></url>
+<url><loc>https://2degreesinvesting.github.io/tilt.eu.taxonomy/LICENSE.html</loc></url>
+<url><loc>https://2degreesinvesting.github.io/tilt.eu.taxonomy/authors.html</loc></url>
+<url><loc>https://2degreesinvesting.github.io/tilt.eu.taxonomy/index.html</loc></url>
+<url><loc>https://2degreesinvesting.github.io/tilt.eu.taxonomy/news/index.html</loc></url>
+<url><loc>https://2degreesinvesting.github.io/tilt.eu.taxonomy/reference/eco_activities_after_keywords_search.html</loc></url>
+<url><loc>https://2degreesinvesting.github.io/tilt.eu.taxonomy/reference/eco_activities_gpt_validation.html</loc></url>
+<url><loc>https://2degreesinvesting.github.io/tilt.eu.taxonomy/reference/ecoinvent_activities_eu_tax_activities.html</loc></url>
+<url><loc>https://2degreesinvesting.github.io/tilt.eu.taxonomy/reference/ecoinvent_activities_with_nace.html</loc></url>
+<url><loc>https://2degreesinvesting.github.io/tilt.eu.taxonomy/reference/ep_companies_ei_activities.html</loc></url>
+<url><loc>https://2degreesinvesting.github.io/tilt.eu.taxonomy/reference/ep_companies_ei_activities_at_company_level.html</loc></url>
+<url><loc>https://2degreesinvesting.github.io/tilt.eu.taxonomy/reference/ep_companies_ei_activities_at_product_level.html</loc></url>
+<url><loc>https://2degreesinvesting.github.io/tilt.eu.taxonomy/reference/ep_companies_join_matched_eco_activities.html</loc></url>
+<url><loc>https://2degreesinvesting.github.io/tilt.eu.taxonomy/reference/eu_tax_activities_all.html</loc></url>
+<url><loc>https://2degreesinvesting.github.io/tilt.eu.taxonomy/reference/eu_tax_activities_all_with_keywords.html</loc></url>
+<url><loc>https://2degreesinvesting.github.io/tilt.eu.taxonomy/reference/eu_tax_activities_keywords.html</loc></url>
+<url><loc>https://2degreesinvesting.github.io/tilt.eu.taxonomy/reference/eu_tax_biodiversity_protection.html</loc></url>
+<url><loc>https://2degreesinvesting.github.io/tilt.eu.taxonomy/reference/eu_tax_circular_economy_transition.html</loc></url>
+<url><loc>https://2degreesinvesting.github.io/tilt.eu.taxonomy/reference/eu_tax_climate_adaptation.html</loc></url>
+<url><loc>https://2degreesinvesting.github.io/tilt.eu.taxonomy/reference/eu_tax_climate_mitigation.html</loc></url>
+<url><loc>https://2degreesinvesting.github.io/tilt.eu.taxonomy/reference/eu_tax_pollution_prevention.html</loc></url>
+<url><loc>https://2degreesinvesting.github.io/tilt.eu.taxonomy/reference/eu_tax_water_protection.html</loc></url>
+<url><loc>https://2degreesinvesting.github.io/tilt.eu.taxonomy/reference/index.html</loc></url>
+<url><loc>https://2degreesinvesting.github.io/tilt.eu.taxonomy/reference/isic_nace_mapper.html</loc></url>
+<url><loc>https://2degreesinvesting.github.io/tilt.eu.taxonomy/reference/taxonomy_eligible.html</loc></url>
+<url><loc>https://2degreesinvesting.github.io/tilt.eu.taxonomy/reference/tilt.eu.taxonomy-package.html</loc></url>
 </urlset>
+
