@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# tilt.eu.taxonomy
+# EU Taxonomy Indicator
 
 <!-- badges: start -->
 
@@ -456,15 +456,3 @@ tax_eligible_ep_companies |>
 #> 10 carlemsaph_00000005472318-001           carlemsaph                 france  pharmaceutical raw material 5c5d1cdb-22df-5e58-a3c7-500e031f03e7_dc1ed0ff-fbaa-47a1-8962… market for propylene … 2011        C20.… Manufacture… Manufacture of:high v… acetylene; ethylene;… TRUE               Yes           
 #> # ℹ abbreviated names: ¹​ecoinvent_activity_name, ²​tax_activity_description
 ```
-
-## Next steps
-
-1.  Apply prototype to CPC classification products + Europages products.
-2.  Clarify whether market activities can be eligible for EU Taxonomy
-    activities starting with “Manufacture of…”?
-3.  TBC how to validate “maybe” from GPT validation.
-4.  Expand to all EU Taxonomy activities.
-5.  Company-level results output share of products that are aligned, not
-    aligned, NA,  
-    transitional and enabling (“contribution type”).
-6.  Optional: Include alignment assessment.

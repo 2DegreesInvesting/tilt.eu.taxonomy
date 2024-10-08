@@ -13,7 +13,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# tilt.eu.taxonomy
+# EU Taxonomy Indicator
 
 <!-- badges: start -->
 [![R-CMD-check](https://github.com/2DegreesInvesting/tilt.eu.taxonomy/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/2DegreesInvesting/tilt.eu.taxonomy/actions/workflows/R-CMD-check.yaml)
@@ -222,14 +222,3 @@ tax_eligible_ep_companies <- taxonomy_eligible(companies_matched_eco_activities)
 tax_eligible_ep_companies |>
   slice(1:10)
 ```
-
-## Next steps
-
-1. Apply prototype to CPC classification products + Europages products.
-2. Clarify whether market activities can be eligible for EU Taxonomy activities starting
-   with “Manufacture of…”? 
-3. TBC how to validate “maybe” from GPT validation.
-4. Expand to all EU Taxonomy activities.
-5. Company-level results output share of products that are aligned, not aligned, NA,  
-   transitional and enabling (“contribution type”).
-6. Optional: Include alignment assessment.
